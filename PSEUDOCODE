@@ -1,0 +1,29 @@
+START
+    int i
+    int x
+
+    i = count_character(string, '%')
+    x = 0
+    WHILE (x < i)
+        Do something based on characters tha come after
+        x++;
+    ENDWHILE
+    Return the output
+END
+
+
+
+int count_character(char *string, char character)
+{
+   char *pt;
+   int i;
+
+   pt = string;
+   i = 0;
+   while (pt = ft_strch(pt, (int)character))
+   {
+      i++; 
+      pt++;
+   }
+   return (i);
+}

@@ -11,21 +11,9 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 int ft_printf(const char *string, ...)
 {
-    char *pt;
-    va_list args;
-    va_start(args, string);
-    pt = string;
-    while ((pt = ft_strchr(string, (int)'%')))
-    {
-        pt++;
-        if (*pt)
-            //Do treatment
-        pt++;
-        //next args
-    }
     
-    va_end(args);
 }
