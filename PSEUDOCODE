@@ -6,8 +6,10 @@ START
 
     i = count_character(string, '%')
     x = 0
+    pt = string;
+    output = NULL;
     WHILE (x < i)
-        Comcatenate pt until '%' into output
+        output = dupCatResize(output, pt, ft_strchr(pt, (int)'%')
         pt = Find '%' in string
         pt++;
         IF (isExigence1(*pt))
@@ -24,6 +26,4 @@ START
     ENDWHILE
     Return the output
 END
-
-
 

@@ -27,6 +27,12 @@ int ft_printf(const char *string, ...)
         pt = ft_strchr(pt, (int)'%');
         pt++;
         if (isExigence1(*pt))
+        {
+            if (ft_isspace((int)pt[1]) || !(pt[1]))
+                //TREATMENT
+            else
+                /* ERROR */
+        }
         else if (isExigence2(*pt))
         else
             break;

@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
+
 int count_character(char *string, char character)
 {
    char *pt;
@@ -51,3 +53,54 @@ int isExigence2(char ch)
         return (1);
     return (0);
 }
+
+char    *dupCatResize(char *old, char *start, char *end)
+{
+    char *rt;
+    char *tmp;
+
+    tmp = old;
+    if (!start)
+        return (old);
+    else if (!end)
+        rt = ft_strjoin(old, start);
+    else
+    {
+        rt = (char *)ft_calloc((end - start) + 1, sizeof(char *));
+        ft_strlcat(rt, start, end - start);
+    }
+    free(tmp);
+    return (rt);
+}
+
+char *convert_s(char *arg)
+{
+}
+
+char convert_c(char arg)
+{
+}
+char convert_p(char arg)
+{
+}
+char convert_d(char arg)
+{
+}
+char convert_percent(char arg)
+{
+}
+char convert_i(char arg)
+{
+}
+char convert_u(char arg)
+{
+}
+char convert_x(char arg)
+{
+}
+char convert_X(char arg)
+{
+}
+
+
+

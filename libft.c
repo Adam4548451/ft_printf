@@ -86,3 +86,33 @@ char	*ft_strdup(char *s)
 	rt_pointer[i] = '\0';
 	return (rt_pointer);
 }
+
+char            *ft_strjoin(char *s1, char *s2)
+{
+        char    *new_string;
+
+        if (!s1 && !s2)
+                return (NULL);
+        if (!s1)
+                return (ft_strdup(s2));
+        if (!s2)
+                return (ft_strdup(s1));
+        if (!(new_string =
+malloc((ft_strlen(s1) + ft_strlen(s2)) + 1 * sizeof(char))))
+                return (NULL);
+        ft_strlcpy(new_string, s1, ft_strlen(s1) + 1);
+        ft_strlcat(new_string, s2, ft_strlen(new_string) + ft_strlen(s2) + 1);
+        return (new_string);
+}
+
+void    *ft_calloc(size_t nmemb, size_t size)
+{
+        void    *rt_pointer;
+        size_t  i;
+
+        i = 0;
+        if ((rt_pointer = (void*)malloc(nmemb * size)) == NULL)
+                return (NULL);
+        ft_bzero(rt_pointer, nmemb * size);
+        return (rt_pointer);
+}
