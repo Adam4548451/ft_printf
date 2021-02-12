@@ -10,15 +10,44 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char    *ft_strchr(char *s, int c)
+int count_character(char *string, char character)
 {
-        int i;
+   char *pt;
+   int i;
 
-        i = 0;
-        while ((*(s + i) != (char)c) && (*(s + i) != '\0'))
-                i++;
-        if (*(s + i) == (char)c)
-                return (s + i);
-        else
-                return (NULL);
+   pt = string;
+   i = 0;
+   while (pt = ft_strch(pt, (int)character))
+   {
+      i++; 
+      pt++;
+   }
+   return (i);
+}
+
+
+int isExigence1(char ch)
+{
+    if (ch == 'c'
+    || ch == 's'
+    || ch == 'p'
+    || ch == 'd'
+    || ch == 'i'
+    || ch == 'u'
+    || ch == 'x'
+    || ch == 'X'
+    || ch == '%')
+        return (1);
+    return (0);
+}
+
+int isExigence2(char ch)
+{
+    if (ch == '+'
+    || ch == '-'
+    || ch == '*'
+    || ft_isdigit((int)ch)
+    || ch == '.')
+        return (1);
+    return (0);
 }

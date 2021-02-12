@@ -5,10 +5,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # include <stdlib.h>
 # include <stdarg.h>
-char    *ft_strchr(char *s, int c);
+char *ft_strchr(char *s, int c);
+int ft_isdigit(int c);
+int ft_isspace(int c);
+
+int count_character(char *string, char character);
+int isExigence1(char ch);
+int isExigence2(char ch);
 #endif

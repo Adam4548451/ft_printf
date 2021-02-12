@@ -1,11 +1,25 @@
 START
     int i
     int x
+    char *pt;
+    char *output
 
     i = count_character(string, '%')
     x = 0
     WHILE (x < i)
-        Do something based on characters tha come after
+        Comcatenate pt until '%' into output
+        pt = Find '%' in string
+        pt++;
+        IF (isExigence1(*pt))
+            IF (ft_isspace((int)pt[1]) || !pt[1])
+                Do something depending on value of pt
+                Concatenate the returned string to output
+            ELSE
+                ERROR
+        ELSEIF (isExigence2(*pt))
+        ELSE 
+            BREAK
+        ENDIF
         x++;
     ENDWHILE
     Return the output
@@ -13,17 +27,3 @@ END
 
 
 
-int count_character(char *string, char character)
-{
-   char *pt;
-   int i;
-
-   pt = string;
-   i = 0;
-   while (pt = ft_strch(pt, (int)character))
-   {
-      i++; 
-      pt++;
-   }
-   return (i);
-}

@@ -11,9 +11,25 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 int ft_printf(const char *string, ...)
 {
-    
+    int i;
+    int x;
+    char *pt;
+
+    i = count_character(string, '%');
+    x = 0;
+
+    pt = string;
+    while (x < i)
+    {
+        pt = ft_strchr(pt, (int)'%');
+        pt++;
+        if (isExigence1(*pt))
+        else if (isExigence2(*pt))
+        else
+            break;
+        x++;
+    }
 }
