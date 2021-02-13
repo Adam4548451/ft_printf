@@ -17,25 +17,35 @@ int ft_printf(const char *string, ...)
     int i;
     int x;
     char *pt;
+    char *output;
+    char *str_arg;
 
-    i = count_character(string, '%');
+    pt = (char*)string;
+    output = NULL;
+    va_list args;
+    va_start(args, string);
+    i = count_character((char*)string, '%');
     x = 0;
-
-    pt = string;
     while (x < i)
     {
+        output = dupCatResize(output, pt, ft_strchr(pt, (int)'%'));
         pt = ft_strchr(pt, (int)'%');
         pt++;
         if (isExigence1(*pt))
-        {
-            if (ft_isspace((int)pt[1]) || !(pt[1]))
-                //TREATMENT
+            if (ft_isspace((int)pt[1]) || !pt[1])
+            {
+                str_arg = va_arg(args, char*);
+                output = dupCatResize(output, convert_s(str_arg), NULL);
+            }
             else
-                /* ERROR */
-        }
-        else if (isExigence2(*pt))
-        else
-            break;
+                break; /* EROOR */
+       else if (isExigence2(*pt))
+           /* DO SOMETHING */;
+       else
+           break; /* EROOR */
         x++;
     }
+    va_end(args);
+    ft_putstr(output);
+    return (0);
 }

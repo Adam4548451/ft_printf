@@ -1,6 +1,6 @@
 CC = clang
 FLAGS = -Wall -Wextra -Werror
-SRC = utils.c libft.c
+SRC = 
 SRC_BONUS = 
 NAME = ft_printf.a
 OBJ = $(SRC:.c=.o)
@@ -25,3 +25,4 @@ bonus:
 	$(CC) -c $(FLAGS) $(SRC_BONUS)
 	ar rc $(NAME) $(OBJ_BONUS)
 	ranlib $(NAME
+

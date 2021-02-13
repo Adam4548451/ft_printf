@@ -19,7 +19,7 @@ int count_character(char *string, char character)
 
    pt = string;
    i = 0;
-   while (pt = ft_strch(pt, (int)character))
+   while ((pt = ft_strchr(pt, (int)character)))
    {
       i++; 
       pt++;
@@ -66,8 +66,8 @@ char    *dupCatResize(char *old, char *start, char *end)
         rt = ft_strjoin(old, start);
     else
     {
-        rt = (char *)ft_calloc((end - start) + 1, sizeof(char *));
-        ft_strlcat(rt, start, end - start);
+        rt = (char *)ft_calloc((end - start) + 2, sizeof(*rt));
+        ft_strlcat(rt, start, end - start + 1);
     }
     free(tmp);
     return (rt);
@@ -75,6 +75,7 @@ char    *dupCatResize(char *old, char *start, char *end)
 
 char *convert_s(char *arg)
 {
+    return (arg);
 }
 
 char convert_c(char arg)
