@@ -20,13 +20,5 @@ int count_character(char *string, char character);
 int isExigence1(char ch);
 int isExigence2(char ch);
 char *dupCatResize(char *old, char *start, char *end);
-char *convert_s(char *arg);
-char convert_c(char arg);
-char convert_p(char arg);
-char convert_d(char arg);
-char convert_percent(char arg);
-char convert_i(char arg);
-char convert_u(char arg);
-char convert_x(char arg);
-char convert_X(char arg);
+char *convert(char *pt, va_list args);
 #endif

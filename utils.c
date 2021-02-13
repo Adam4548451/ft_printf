@@ -72,36 +72,3 @@ char    *dupCatResize(char *old, char *start, char *end)
     free(tmp);
     return (rt);
 }
-
-char *convert_s(char *arg)
-{
-    return (arg);
-}
-
-char convert_c(char arg)
-{
-}
-char convert_p(char arg)
-{
-}
-char convert_d(char arg)
-{
-}
-char convert_percent(char arg)
-{
-}
-char convert_i(char arg)
-{
-}
-char convert_u(char arg)
-{
-}
-char convert_x(char arg)
-{
-}
-char convert_X(char arg)
-{
-}
-
-
-

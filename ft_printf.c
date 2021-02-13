@@ -34,8 +34,9 @@ int ft_printf(const char *string, ...)
         if (isExigence1(*pt))
             if (ft_isspace((int)pt[1]) || !pt[1])
             {
-                str_arg = va_arg(args, char*);
-                output = dupCatResize(output, convert_s(str_arg), NULL);
+                str_arg = convert(pt, args);
+                output = dupCatResize(output, str_arg, NULL);
+                free(str_arg);
             }
             else
                 break; /* EROOR */

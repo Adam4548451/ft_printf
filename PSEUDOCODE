@@ -1,0 +1,36 @@
+START
+    int i
+    int x
+    char *pt;
+    char *output
+
+    i = count_character(string, '%')
+    x = 0
+    pt = string;
+    output = NULL;
+    va_list args;
+    va_start(args, string);
+    char *str_arg
+    WHILE (x < i)
+        output = dupCatResize(output, pt, ft_strchr(pt, (int)'%')
+        pt = Find '%' in string
+        pt++;
+        IF (isExigence1(*pt))
+            IF (ft_isspace((int)pt[1]) || !pt[1])
+                //The only way we got to determine the type of va_arg is by looking at The conversion operator (we can't handle a wrong input in this case), so:
+                Based on (*pt) define TYPE_OF_VAARG
+                str_arg = va_arg(args, TYPE_OF_VAARG)
+                Convert str_arg to string
+                Concatenate the returned string to output (for this use join and free)
+            ELSE
+                ERROR - BREAK
+        ELSEIF (isExigence2(*pt))
+        ELSE 
+            BREAK
+        ENDIF
+        x++;
+    ENDWHILE
+    va_end(args)
+    print the output with pustr
+END
+

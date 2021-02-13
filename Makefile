@@ -1,5 +1,6 @@
 CC = clang
 FLAGS = -Wall -Wextra -Werror
+LIBFT = ./libft/$(wildcard *.c)
 SRC = 
 SRC_BONUS = 
 NAME = ft_printf.a
