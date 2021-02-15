@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-char convert_hex_table(unsigned int input, char *pt)
+char convert_hex_table(unsigned long input, char *pt)
 {
     if (input > 9 && *pt == 'x')
         return ('a' + (input - 10));
@@ -21,7 +21,7 @@ char convert_hex_table(unsigned int input, char *pt)
     return ('0' + input);
 }
 
-char *int2hexstring(unsigned int input, char *pt)
+char *int2hexstring(unsigned long input, char *pt, size_t size)
 {
     char *str;
     char *output;
@@ -29,10 +29,13 @@ char *int2hexstring(unsigned int input, char *pt)
     int y;
 
     i = 0;
-    str = (char*)ft_calloc(1, sizeof("FFFFFFFF"));
+    str = (char*)ft_calloc(size, sizeof(*str));
     while (input % 16 > 0)
     {
-        str[i] = convert_hex_table(input % 16, pt);
+        if (*pt == 'p')
+            str[i] = convert_hex_table(input % 16, "x");
+        else
+            str[i] = convert_hex_table(input % 16, pt);
         input /= 16;
         i++;
     }
@@ -49,6 +52,8 @@ char *int2hexstring(unsigned int input, char *pt)
 }
 
 
+
+
 /*
 This function converts va_arg into a string.
 To do this, it must switch to the next va_arg.
@@ -59,6 +64,7 @@ It will be necessary to free the memory allocated for str_arg after concatenatio
 char *convert(char *pt, va_list args)
 {
     char *str_arg;
+    unsigned long addr;
     if (*pt == 'c')
     {
         str_arg = (char*)ft_calloc(1,sizeof(*str_arg));
@@ -69,8 +75,12 @@ char *convert(char *pt, va_list args)
     else if (*pt == 's')
         str_arg = ft_strdup(va_arg(args, char*));
     else if (*pt == 'x' || *pt == 'X')
-        str_arg = int2hexstring(va_arg(args, unsigned int), pt);
-    //else if (*pt == 'p')
+        str_arg = int2hexstring((unsigned long)va_arg(args, unsigned int), pt, 8);
+    else if(*pt == 'p')
+    {
+        addr = (unsigned long)va_arg(args, void *);
+        str_arg = ft_strjoin("0x",int2hexstring(addr, pt, 20));
+    }
     //OTHER CASES
     return (str_arg);
 }
