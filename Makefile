@@ -27,3 +27,8 @@ bonus:
 	ar rc $(NAME) $(OBJ_BONUS)
 	ranlib $(NAME
 
+test:
+	$(CC) *.c libft/*.c
+	./a.out
+debug:
+	$(CC) -g *.c libft/*.c

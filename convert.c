@@ -12,6 +12,42 @@
 
 #include "ft_printf.h"
 
+char convert_hex_table(unsigned int input, char *pt)
+{
+    if (input > 9 && *pt == 'x')
+        return ('a' + (input - 10));
+    if (input > 9 && *pt == 'X')
+        return ('A' + (input - 10));
+    return ('0' + input);
+}
+
+char *int2hexstring(unsigned int input, char *pt)
+{
+    char *str;
+    char *output;
+    int i;
+    int y;
+
+    i = 0;
+    str = (char*)ft_calloc(1, sizeof("FFFFFFFF"));
+    while (input % 16 > 0)
+    {
+        str[i] = convert_hex_table(input % 16, pt);
+        input /= 16;
+        i++;
+    }
+    i = ft_strlen(str);
+    y = 0;
+    output = ft_strdup(str);
+    while (i-- > 0)
+    {
+        output[y] = str[i];
+        y++;
+    }
+    free (str);
+    return (output);
+}
+
 /*
 This function converts va_arg into a string.
 To do this, it must switch to the next va_arg.
@@ -32,11 +68,10 @@ char *convert(char *pt, va_list args)
     else if (*pt == 's')
         str_arg = ft_strdup(va_arg(args, char*));
     else if (*pt == 'x' || *pt == 'X')
-        /* Convert int to hex */;
+        str_arg = int2hexstring(va_arg(args, unsigned int), pt);
     else if (*pt == '%')
         str_arg = ft_strdup("");
     //OTHER CASES
     return (str_arg);
 }
-
 

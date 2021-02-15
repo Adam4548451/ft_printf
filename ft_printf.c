@@ -32,7 +32,12 @@ int ft_printf(const char *string, ...)
         pt = ft_strchr(pt, (int)'%');
         pt++;
         if (isExigence1(*pt))
-            if (ft_isspace((int)pt[1]) || !pt[1])
+            if (*pt == '%')
+            {
+                x++;
+                break ;
+            }
+            else if (ft_isspace((int)pt[1]) || !pt[1])
             {
                 str_arg = convert(pt, args);
                 output = dupCatResize(output, str_arg, NULL);
