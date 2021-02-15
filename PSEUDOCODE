@@ -1,41 +1,39 @@
 START
     int i
-    int x
     char *pt;
     char *output
     char *str_arg
     va_list args;
 
-    x = 0
     pt = string;
     output = NULL;
     va_start(args, string);
-    i = count_character(string, '%')
-    WHILE (x < i)
-        output = dupCatResize(output, pt, ft_strchr(pt, (int)'%')
-        pt = Find '%' in string
-        pt++;
-        IF (isExigence1(*pt))
-            IF (*pt == '%')
-                // IF a '%' is encounter
-                x++
-                BREAK;
-            ELSE IF (ft_isspace((int)pt[1]) || !pt[1])
-                //The only way we got to determine the type of va_arg is by looking at The conversion operator (we can't handle a wrong input in this case), so:
-                Based on (*pt) define TYPE_OF_VAARG
-                str_arg = va_arg(args, TYPE_OF_VAARG)
-                Convert str_arg to string
-                Concatenate the returned string to output (for this use join and free)
-            ELSE
-                ERROR - BREAK
-            ENDIF
-        ELSEIF (isExigence2(*pt))
-        ELSE 
-            BREAK
-        ENDIF
-        x++;
-    ENDWHILE
-    va_end(args)
-    print the output with pustr
-END
-
+i = count_character(string, '%')
+//WHILE THERE ARE STILL % TO HANDLE
+while (i-- > 0)
+{
+    output = dupCatResize(output, pt, ft_strchr(pt, (int)'%')
+    if (!(pt = ft_strchr(pt, (int)'%')))
+        break;
+    if (isExigence1(*(pt++)))
+        if(*pt == '%')
+            i--;
+        else if (ft_isspace((int)pt[1]) || !pt[1])
+        {
+            str_arg = convert(pt, args);
+            output = dupCatResize(output, str_arg, NULL);
+            free(str_arg);
+        }
+        else
+            return (-1) /*ERROR WITH THE SYMBOL THAT COMES AFTER %X[] */
+    else if (/* OTHER EXIGENCES/*)
+        (...)
+    else
+        return (-1) /* NO EXIGENCE MET, OPERATOR NOT RECOGNIZED */
+    pt++;
+}
+va_end(args)
+if (pt)
+    output = dupCatResize(output, pt, NULL);
+print the output with pustr
+return ft_strlen(output)

@@ -15,28 +15,23 @@
 int ft_printf(const char *string, ...)
 {
     int i;
-    int x;
     char *pt;
     char *output;
     char *str_arg;
 
-    pt = (char*)string;
+    pt = (char *)string;
     output = NULL;
     va_list args;
     va_start(args, string);
     i = count_character((char*)string, '%');
-    x = 0;
-    while (x < i)
+    while (i-- > 0)
     {
         output = dupCatResize(output, pt, ft_strchr(pt, (int)'%'));
-        pt = ft_strchr(pt, (int)'%');
-        pt++;
-        if (isExigence1(*pt))
+        if (!(pt = ft_strchr(pt, (int)'%')))
+            break;
+        if (isExigence1(*(pt++)))
             if (*pt == '%')
-            {
-                x++;
-                break ;
-            }
+                i--;
             else if (ft_isspace((int)pt[1]) || !pt[1])
             {
                 str_arg = convert(pt, args);
@@ -44,14 +39,18 @@ int ft_printf(const char *string, ...)
                 free(str_arg);
             }
             else
-                break; /* EROOR */
-       else if (isExigence2(*pt))
-           /* DO SOMETHING */;
-       else
-           break; /* EROOR */
-        x++;
+                return (-1); /*ERROR WITH THE SYMBOL THAT COMES AFTER %X[] */
+        //else if (/* OTHER EXIGENCES */)
+        //;
+        else
+            return (-1); /* NO EXIGENCE MET, OPERATOR NOT RECOGNIZED */
+        pt++;
     }
+    if (pt)
+        output = dupCatResize(output, pt, NULL);
     va_end(args);
     ft_putstr(output);
-    return (0);
+    i = ft_strlen(output);
+    free(output);
+    return (i);
 }

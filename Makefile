@@ -28,7 +28,8 @@ bonus:
 	ranlib $(NAME
 
 test:
-	$(CC) *.c libft/*.c
-	./a.out
+	$(CC) -fsanitize=address -g *.c libft/*.c
+	./a.out | cat -e
 debug:
 	$(CC) -g *.c libft/*.c
+	gdb ./a.out

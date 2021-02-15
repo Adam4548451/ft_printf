@@ -64,11 +64,18 @@ char    *dupCatResize(char *old, char *start, char *end)
         return (old);
     else if (!end)
         rt = ft_strjoin(old, start);
-    else
+    else if (!old)
     {
         rt = (char *)ft_calloc((end - start) + 2, sizeof(*rt));
         ft_strlcat(rt, start, end - start + 1);
     }
-    free(tmp);
+    else
+    {
+        rt = (char *)ft_calloc((end - start) + ft_strlen(old) + 2, sizeof(*rt));
+        ft_strlcpy(rt, old, ft_strlen(old) + 1);
+        ft_strlcat(rt, start, end - start + 1 + ft_strlen(rt));
+    }
+    if (tmp)
+        free(tmp);
     return (rt);
 }

@@ -48,6 +48,7 @@ char *int2hexstring(unsigned int input, char *pt)
     return (output);
 }
 
+
 /*
 This function converts va_arg into a string.
 To do this, it must switch to the next va_arg.
@@ -69,8 +70,7 @@ char *convert(char *pt, va_list args)
         str_arg = ft_strdup(va_arg(args, char*));
     else if (*pt == 'x' || *pt == 'X')
         str_arg = int2hexstring(va_arg(args, unsigned int), pt);
-    else if (*pt == '%')
-        str_arg = ft_strdup("");
+    //else if (*pt == 'p')
     //OTHER CASES
     return (str_arg);
 }
