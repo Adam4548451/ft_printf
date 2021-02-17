@@ -69,4 +69,5 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)
 void	ft_putchar(char c);
 void	ft_putstr(char *str);
 int	ft_isspace(int c);
+char			*ft_uitoa(unsigned int n);
 #endif

@@ -81,7 +81,10 @@ char *convert(char *pt, va_list args)
         addr = (unsigned long)va_arg(args, void *);
         str_arg = ft_strjoin("0x",int2hexstring(addr, pt, 20));
     }
-    //OTHER CASES
+    else if (*pt == 'u')
+        str_arg = ft_uitoa(va_arg(args, unsigned int));
+    else 
+        /* Error */ ;
     return (str_arg);
 }
 
