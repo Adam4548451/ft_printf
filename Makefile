@@ -1,9 +1,14 @@
 CC = clang
 FLAGS = -Wall -Wextra -Werror
-LIBFT = ./libft/$(wildcard *.c)
-SRC = 
-SRC_BONUS = 
 NAME = ft_printf.a
+
+
+LIBFT = ./libft/*.c
+PARSING = ./parsing/*.c
+UTILS = ./utils/*.c
+SRC = $(wildcard *.c) $(PARSING) $(UTILS) $(LIBFT)
+SRC_BONUS = 
+
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
@@ -28,8 +33,8 @@ bonus:
 	ranlib $(NAME
 
 test:
-	$(CC) -fsanitize=address -g *.c libft/*.c
+	$(CC) -fsanitize=address $(SRC)
 	./a.out | cat -e
 debug:
-	$(CC) -g *.c libft/*.c
+	$(CC) -g $(SRC)
 	gdb ./a.out

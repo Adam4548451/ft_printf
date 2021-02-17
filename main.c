@@ -1,11 +1,11 @@
 #include "ft_printf.h"
+#include <stdio.h>
 #define TEST
 
 
 int main(void)
 {
     #ifdef TEST
-    #include <stdio.h>
     printf("%.d",42);
     #endif
 

@@ -66,8 +66,9 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)
 		(void *), void (*del)(void *));
-void	ft_putchar(char c);
-void	ft_putstr(char *str);
-int	ft_isspace(int c);
-char			*ft_uitoa(unsigned int n);
+void				ft_putchar(char c);
+void				ft_putstr(char *str);
+int					ft_isspace(int c);
+char				*ft_uitoa(unsigned int n);
+int					ft_issign(char c);
 #endif

@@ -1,39 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exigences.c                                        :+:      :+:    :+:   */
+/*   ft_issign.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/17 09:36:34 by amaroni           #+#    #+#             */
-/*   Updated: 2021/02/17 09:36:38 by amaroni          ###   ########.fr       */
+/*   Created: 2021/02/17 12:26:21 by amaroni           #+#    #+#             */
+/*   Updated: 2021/02/17 12:26:36 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int isExigence1(char ch)
+int	ft_issign(char c)
 {
-    if (ch == 'c'
-    || ch == 's'
-    || ch == 'p'
-    || ch == 'd'
-    || ch == 'i'
-    || ch == 'u'
-    || ch == 'x'
-    || ch == 'X'
-    || ch == '%')
-        return (1);
-    return (0);
-}
-
-int isExigence2(char ch)
-{
-    if (ch == '+'
-    || ch == '-'
-    || ch == '*'
-    || ft_isdigit((int)ch)
-    || ch == '.')
-        return (1);
-    return (0);
+	if (c == '+')
+		return (1);
+	else if (c == '-')
+		return (-1);
+	else
+		return (0);
 }

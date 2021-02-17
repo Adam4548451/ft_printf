@@ -12,16 +12,6 @@
 
 #include "libft.h"
 
-static int	ft_issign(char c)
-{
-	if (c == '+')
-		return (1);
-	else if (c == '-')
-		return (-1);
-	else
-		return (0);
-}
-
 int			ft_atoi(char *nptr)
 {
 	unsigned long	x10;
