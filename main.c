@@ -1,19 +1,18 @@
 #include "ft_printf.h"
-////#define TEST
+#define TEST
 
 
 int main(void)
 {
     #ifdef TEST
     #include <stdio.h>
-    int a = 15;
-    printf("The pointer with printf: int = %lu , hex = %p\n", &a, &a);
-    ft_printf("The pointer with ft_printf: hex = %p\n", &a);
+    printf("%.d",42);
     #endif
 
     //ft_printf("Hello %%\n", "my friend!");
     //ft_printf("Hello %d %d %d\n", 15 ,16,17);
     //ft_printf("%x", 4859);
+    //ft_printf("%u",45468465);
 
     return (0);
 }

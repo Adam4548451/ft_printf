@@ -1,0 +1,49 @@
+IF (character == '*')
+    IF (is_diuxX(character[1]))
+         TRAITEMENT OK
+    ELSEIF (character[1] == '.')
+        IF (is_diuxX(character[2]))
+         TRAITEMENT OK
+        ELSEIF (character[2] == '*')
+            IF (is_diuxX(character[3]))
+                TRAITEMENT OK
+            ELSE
+                ERROR
+            ENDIF
+        ELSEIF(character[2] to ... is digit)
+            IF (next character is_diuxX)
+                TRAITEMENT OK
+            ELSE
+                ERROR
+            ENDIF
+        ELSE
+            ERROR
+        ENDIF
+    ELSE
+        ERROR
+    ENDIF
+ELSE IF (character == '.')
+    IF (character[1] to ... is digit)
+
+    ENDIF
+
+ELSE
+    ft_
+ENDIF
+
+
+
+
+
+
+int is_diuxX(char ch)
+{
+    if (ch == 'd'
+    || ch == 'i'
+    || ch == 'u'
+    || ch == 'x'
+    || ch == 'X')
+        return (1);
+    return (0)
+}
+

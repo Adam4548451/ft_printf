@@ -28,31 +28,6 @@ int count_character(char *string, char character)
 }
 
 
-int isExigence1(char ch)
-{
-    if (ch == 'c'
-    || ch == 's'
-    || ch == 'p'
-    || ch == 'd'
-    || ch == 'i'
-    || ch == 'u'
-    || ch == 'x'
-    || ch == 'X'
-    || ch == '%')
-        return (1);
-    return (0);
-}
-
-int isExigence2(char ch)
-{
-    if (ch == '+'
-    || ch == '-'
-    || ch == '*'
-    || ft_isdigit((int)ch)
-    || ch == '.')
-        return (1);
-    return (0);
-}
 
 char    *dupCatResize(char *old, char *start, char *end)
 {
