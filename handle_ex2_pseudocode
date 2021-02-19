@@ -51,7 +51,3 @@ ENDIF
 
 
 
-else if (isExigence1(pt))
-{
-    
-}
