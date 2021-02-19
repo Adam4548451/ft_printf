@@ -6,7 +6,7 @@
 int main(void)
 {
     #ifdef TEST
-    printf("%.d",42);
+    printf("%.5x",0xF);
     #endif
 
     //ft_printf("Hello %%\n", "my friend!");

@@ -34,7 +34,7 @@ int ft_printf(const char *string, ...)
                 i--;
             else if (ft_isspace((int)pt[1]) || !pt[1])
             {
-                str_arg = convert(pt, args);
+                str_arg = convert_ex1(pt, args);
                 output = dupCatResize(output, str_arg, NULL);
                 free(str_arg);
             }

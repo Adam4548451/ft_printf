@@ -4,9 +4,8 @@ NAME = ft_printf.a
 
 
 LIBFT = ./libft/*.c
-PARSING = ./parsing/*.c
-UTILS = ./utils/*.c
-SRC = $(wildcard *.c) $(PARSING) $(UTILS) $(LIBFT)
+UTILS = ./utils/*.c ./utils/*/*.c
+SRC = $(wildcard *.c) $(UTILS) $(LIBFT)
 SRC_BONUS = 
 
 OBJ = $(SRC:.c=.o)

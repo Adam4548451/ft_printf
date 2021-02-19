@@ -20,13 +20,13 @@ while (i-- > 0)
             i--;
         else if (ft_isspace((int)pt[1]) || !pt[1])
         {
-            str_arg = convert(pt, args);
+            str_arg = convert_ex1(pt, args);
             output = dupCatResize(output, str_arg, NULL);
             free(str_arg);
         }
         else
             return (-1) /*ERROR WITH THE SYMBOL THAT COMES AFTER %X[] */
-    else if (/* OTHER EXIGENCES/*)
+    else if (isExigence2(*pt))
         (...)
     else
         return (-1) /* NO EXIGENCE MET, OPERATOR NOT RECOGNIZED */

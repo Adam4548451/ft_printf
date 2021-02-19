@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert.c                                          :+:      :+:    :+:   */
+/*   convert_ex1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,30 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "../../ft_printf.h"
 
-int isDorW(char *pt)
-{
-    if (ft_isdigit(*pt) || *pt == '*')
-        return (1);
-    return (0);
-}
-
-
-
-int is_diuxX(char ch)
-{
-    if (ch == 'd'
-    || ch == 'i'
-    || ch == 'u'
-    || ch == 'x'
-    || ch == 'X')
-        return (1);
-    return (0)
-}
-
-
-char convert_hex_table(unsigned long input, char *pt)
+char convert_ex1_hex_table(unsigned long input, char *pt)
 {
     if (input > 9 && *pt == 'x')
         return ('a' + (input - 10));
@@ -54,9 +33,9 @@ char *int2hexstring(unsigned long input, char *pt, size_t size)
     while (input % 16 > 0)
     {
         if (*pt == 'p')
-            str[i] = convert_hex_table(input % 16, "x");
+            str[i] = convert_ex1_hex_table(input % 16, "x");
         else
-            str[i] = convert_hex_table(input % 16, pt);
+            str[i] = convert_ex1_hex_table(input % 16, pt);
         input /= 16;
         i++;
     }
@@ -76,13 +55,13 @@ char *int2hexstring(unsigned long input, char *pt, size_t size)
 
 
 /*
-This function converts va_arg into a string.
+This function convert_ex1s va_arg into a string.
 To do this, it must switch to the next va_arg.
 Switching require that you know the type the argument used, the only way we have to get this info is by beliving user with the type of oeprator conversion it used.
 Thus this function must accept two entries: the operator as a char and the list or arguments as a va_list.
 It will be necessary to free the memory allocated for str_arg after concatenation (certainly in the caller)
 */
-char *convert(char *pt, va_list args)
+char *convert_ex1(char *pt, va_list args)
 {
     char *str_arg;
     unsigned long addr;

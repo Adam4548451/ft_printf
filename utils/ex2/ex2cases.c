@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "../../ft_printf.h"
 
 int ex2case1(char *pt)
 {
@@ -61,13 +61,13 @@ int handle_ex2cases(char *pt)
 {
     if (ex2case1(pt))
         return (1);
-    if (ex2case2(pt))
+    else if (ex2case2(pt))
         return (2);
-    if (ex2case3(pt))
+    else if (ex2case3(pt))
         return (3);
-    if (ex2case4(pt))
+    else if (ex2case4(pt))
         return (4);
-    if (ex2case5(pt))
+    else if (ex2case5(pt))
         return (5);
     else
         return (0);

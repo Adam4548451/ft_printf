@@ -1,0 +1,20 @@
+IF (CASE5)
+    pt++;
+    Execute line 35 to 40 of ft_printf.c
+ELSE IF (CASE4)
+    IF (pt[1] is digit)
+        x = digit - ft_strlen(next arg)
+        str_arg = Concat ('0' x times, next arg)
+    ELSE
+        x = (int)(next arg) - ft_strlen(str(next next arg))
+        str_arg = Concat ('0' x times, next arg)
+    ENDIF
+ELSE IF (CASE3)
+    IF (pt[0] is digit)
+        x = digit - ft_strlen(next arg)
+        str_arg = Concat ('0' x times, next arg)
+    ELSE
+        x = (int)(next arg) - ft_strlen(str(next next arg))
+        str_arg = Concat ('0' x times, next arg)
+    ENDIF
+ENDIF

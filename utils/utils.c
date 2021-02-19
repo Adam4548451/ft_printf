@@ -12,6 +12,24 @@
 
 #include "../ft_printf.h"
 
+int isDorW(char *pt)
+{
+    if (ft_isdigit(*pt) || *pt == '*')
+        return (1);
+    return (0);
+}
+
+int is_diuxX(char ch)
+{
+    if (ch == 'd'
+    || ch == 'i'
+    || ch == 'u'
+    || ch == 'x'
+    || ch == 'X')
+        return (1);
+    return (0);
+}
+
 int count_character(char *string, char character)
 {
    char *pt;
