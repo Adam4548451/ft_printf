@@ -6,7 +6,9 @@
 int main(void)
 {
     #ifdef TEST
-    printf("%.5x",0xF);
+    printf("%-.5d\n",5);
+    printf("%+.5d\n",5);
+    printf("%+2.1d\n",5655);
     #endif
 
     //ft_printf("Hello %%\n", "my friend!");

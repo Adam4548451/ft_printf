@@ -27,7 +27,7 @@ while (i-- > 0)
         else
             return (-1) /*ERROR WITH THE SYMBOL THAT COMES AFTER %X[] */
     else if (isExigence2(*pt))
-        (...)
+        IF valid return 
     else
         return (-1) /* NO EXIGENCE MET, OPERATOR NOT RECOGNIZED */
     pt++;
