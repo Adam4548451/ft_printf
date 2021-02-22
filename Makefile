@@ -4,7 +4,7 @@ NAME = ft_printf.a
 
 
 LIBFT = ./libft/*.c
-UTILS = ./utils/*.c ./utils/*/*.c
+UTILS = ./utils/*.c
 SRC = $(wildcard *.c) $(UTILS) $(LIBFT)
 SRC_BONUS = 
 

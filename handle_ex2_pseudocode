@@ -1,14 +1,36 @@
 IF (CASE5)
     pt++;
-    Execute line 35 to 40 of ft_printf.c
+    str_arg = convert_ex1(pt, args);
+    output = dupCatResize(output, str_arg, NULL);
+    free(str_arg)
 ELSE IF (CASE4)
-    IF (pt[1] is digit)
-        x = digit - ft_strlen(next arg)
-        str_arg = Concat ('0' x times, next arg)
-    ELSE
-        x = (int)(next arg) - ft_strlen(str(next next arg))
-        str_arg = Concat ('0' x times, next arg)
-    ENDIF
+    int x;
+    char *str_arg;
+    char *tmp;
+    if (ft_isdigit(pt[1]))
+    {
+        tmp = ft_itoa(va_arg(args, int));
+        x = ft_atoi(pt + 1) - ft_strlen(tmp);
+        if (x < 0)
+            x = 0;
+        str_arg = (char*)ft_calloc(x + ft_strlen(tmp) + 1, sizeof(char));
+        while (x-- > 0)
+           ft_strlcat(str_arg,"0", ft_strlen(str_arg)+2);
+        ft_strlcat(str_arg, tmp, ft_strlen(tmp) + ft_strlen(str_arg) + 2);
+    }
+    else
+    {
+        x = va_arg(args, int);
+        tmp = ft_itoa(va_arg(args, int));
+        x = x - ft_strlen(tmp);
+        if (x < 0)
+            x = 0;
+        str_arg = (char*)ft_calloc(x + ft_strlen(tmp) + 1 , sizeof(char));
+        while (x-- > 0)
+           ft_strlcat(str_arg,"0", ft_strlen(str_arg)+2);
+        ft_strlcat(str_arg, tmp, ft_strlen(tmp) + ft_strlen(str_arg) + 2);
+    } 
+    free(str_arg);
 ELSE IF (CASE3)
     IF (pt[0] is digit)
         x = digit - ft_strlen(next arg)

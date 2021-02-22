@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 #include <stdio.h>
-#define TEST
+//#define TEST
 
 
 int main(void)
@@ -12,9 +12,10 @@ int main(void)
     #endif
 
     //ft_printf("Hello %%\n", "my friend!");
-    //ft_printf("Hello %d %d %d\n", 15 ,16,17);
+    ft_printf("Hello %d %d %d\n", 15 ,16,17);
     //ft_printf("%x", 4859);
     //ft_printf("%u",45468465);
+    //ft_printf("%.6d\n", 15);
 
     return (0);
 }

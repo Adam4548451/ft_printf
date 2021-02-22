@@ -25,4 +25,14 @@ char *dupCatResize(char *old, char *start, char *end);
 char *convert_ex1(char *pt, va_list args);
 char convert_ex1_hex_table(unsigned long input, char *pt);
 char *int2hexstring(unsigned long input, char *pt, size_t size);
+
+int ex2case1(char *pt);
+int ex2case2(char *pt);
+int ex2case3(char *pt);
+int ex2case4(char *pt);
+int ex2case5(char *pt);
+int handle_ex2cases(char *pt);
+int is_digit_or_wildcard(char *pt);
+int is_diuxX(char ch);
+char    *strchr_whitespace(char *pt);
 #endif

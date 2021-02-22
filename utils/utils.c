@@ -12,11 +12,16 @@
 
 #include "../ft_printf.h"
 
-int isDorW(char *pt)
+int is_digit_or_wildcard(char *pt)
 {
-    if (ft_isdigit(*pt) || *pt == '*')
+    int i;
+
+    i = 0;
+    if (*pt == '*')
         return (1);
-    return (0);
+    while (ft_isdigit(pt[i]))
+        i++;
+    return (i);
 }
 
 int is_diuxX(char ch)
@@ -71,4 +76,18 @@ char    *dupCatResize(char *old, char *start, char *end)
     if (tmp)
         free(tmp);
     return (rt);
+}
+
+
+char    *strchr_whitespace(char *pt)
+{
+    int i;
+    
+    i = 0;
+    while(pt[i] && !ft_isspace(pt[i]))
+        i++;
+    if (pt[i])
+        return (pt + i);
+    else 
+        return (NULL);
 }

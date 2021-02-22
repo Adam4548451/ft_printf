@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../ft_printf.h"
+#include "../ft_printf.h"
 
 int ex2case1(char *pt)
 {
     if (ft_issign(pt[0])
-        && isDorW(pt[1])
+        && is_digit_or_wildcard(pt + 1)
         && pt[2] == '.'
-        && isDorW(pt[3])
+        && is_digit_or_wildcard(pt + 3)
         && is_diuxX(pt[4]))
         return (1);
     return (0);
@@ -25,9 +25,9 @@ int ex2case1(char *pt)
 
 int ex2case2(char *pt)
 {
-    if (isDorW(pt[0]) 
+    if (is_digit_or_wildcard(pt) 
         && pt[1] == '.'
-        && isDorW(pt[2]) 
+        && is_digit_or_wildcard(pt + 2) 
         && is_diuxX(pt[3]))
         return (1);
     return (0);
@@ -35,16 +35,19 @@ int ex2case2(char *pt)
 
 int ex2case3(char *pt)
 {
-    if (isDorW(pt[0]) 
+    if (is_digit_or_wildcard(pt) 
         && pt[1] == '.' 
         && is_diuxX(pt[2]))
-        return (0);
-    return (1);
+        return (1);
+    return (0);
 }
 
 int ex2case4(char *pt)
 {
-    if (pt[0] == '.' && isDorW(pt[1]) && is_diuxX(pt[2]))
+    int i;
+    
+    i = is_digit_or_wildcard(pt + 1);
+    if (pt[0] == '.' && i && is_diuxX(pt[i + 1]))
         return (1);
     return (0);
 }
