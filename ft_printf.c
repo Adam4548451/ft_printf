@@ -111,6 +111,10 @@ int ft_printf(const char *string, ...)
                 output = dupCatResize(output, str_arg, NULL);
                 free(str_arg);
             }
+            else if (handle_ex2cases(pt) == 2)
+            {
+
+            }
         }
         else
             return (-1); /* NO EXIGENCE MET, OPERATOR NOT RECOGNIZED */
