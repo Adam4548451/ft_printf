@@ -19,6 +19,7 @@ int ft_printf(const char *string, ...)
     char *output;
     char *str_arg;
     char *tmp;
+    int x;
 
     pt = (char *)string;
     output = NULL;
@@ -54,26 +55,27 @@ int ft_printf(const char *string, ...)
             }
             else if (handle_ex2cases(pt) == 4)
             {
+                x = 0;
                 if (ft_isdigit(pt[1]))
                 {
                     tmp = ft_itoa(va_arg(args, int));
-                    i = ft_atoi(pt + 1) - ft_strlen(tmp);
-                    if (i < 0)
-                        i = 0;
-                    str_arg = (char *)ft_calloc(i + ft_strlen(tmp) + 1, sizeof(char));
-                    while (i-- > 0)
+                    x= ft_atoi(pt + 1) - ft_strlen(tmp);
+                    if (x< 0)
+                        x= 0;
+                    str_arg = (char *)ft_calloc(x+ ft_strlen(tmp) + 1, sizeof(char));
+                    while (x-- > 0)
                         ft_strlcat(str_arg, "0", ft_strlen(str_arg) + 2);
                     ft_strlcat(str_arg, tmp, ft_strlen(tmp) + ft_strlen(str_arg) + 2);
                 }
                 else
                 {
-                    i = va_arg(args, int);
+                    x= va_arg(args, int);
                     tmp = ft_itoa(va_arg(args, int));
-                    i = i - ft_strlen(tmp);
-                    if (i < 0)
-                        i = 0;
-                    str_arg = (char *)ft_calloc(i + ft_strlen(tmp) + 1, sizeof(char));
-                    while (i-- > 0)
+                    x= x- ft_strlen(tmp);
+                    if (x< 0)
+                        x= 0;
+                    str_arg = (char *)ft_calloc(x+ ft_strlen(tmp) + 1, sizeof(char));
+                    while (x-- > 0)
                         ft_strlcat(str_arg, "0", ft_strlen(str_arg) + 2);
                     ft_strlcat(str_arg, tmp, ft_strlen(tmp) + ft_strlen(str_arg) + 2);
                 }
@@ -83,6 +85,7 @@ int ft_printf(const char *string, ...)
             else
                 return (-1); /* NO EXIGENCE MET, OPERATOR NOT RECOGNIZED */
         }
+        pt = strchr_whitespace(pt);
     }
     if (pt)
         output = dupCatResize(output, pt, NULL);
