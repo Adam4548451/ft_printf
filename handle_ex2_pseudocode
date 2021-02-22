@@ -38,7 +38,7 @@ ELSE IF (CASE3)
     ELSE
         x = (int)(next arg) - ft_strlen(str(next next arg))
         str_arg = Concat ('0' x times, next arg)
-ELSE IF (CASE4)
+ELSE IF (CASE2)
     IF (pt[0] is digit)
         x = digit - ft_strlen(next arg)
         str_arg = Concat ('0' x times, next arg)

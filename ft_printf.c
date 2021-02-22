@@ -59,22 +59,22 @@ int ft_printf(const char *string, ...)
                 if (ft_isdigit(pt[1]))
                 {
                     tmp = ft_itoa(va_arg(args, int));
-                    x= ft_atoi(pt + 1) - ft_strlen(tmp);
-                    if (x< 0)
-                        x= 0;
-                    str_arg = (char *)ft_calloc(x+ ft_strlen(tmp) + 1, sizeof(char));
+                    x = ft_atoi(pt + 1) - ft_strlen(tmp);
+                    if (x < 0)
+                        x = 0;
+                    str_arg = (char *)ft_calloc(x + ft_strlen(tmp) + 1, sizeof(char));
                     while (x-- > 0)
                         ft_strlcat(str_arg, "0", ft_strlen(str_arg) + 2);
                     ft_strlcat(str_arg, tmp, ft_strlen(tmp) + ft_strlen(str_arg) + 2);
                 }
                 else
                 {
-                    x= va_arg(args, int);
+                    x = va_arg(args, int);
                     tmp = ft_itoa(va_arg(args, int));
-                    x= x- ft_strlen(tmp);
-                    if (x< 0)
-                        x= 0;
-                    str_arg = (char *)ft_calloc(x+ ft_strlen(tmp) + 1, sizeof(char));
+                    x = x - ft_strlen(tmp);
+                    if (x < 0)
+                        x = 0;
+                    str_arg = (char *)ft_calloc(x + ft_strlen(tmp) + 1, sizeof(char));
                     while (x-- > 0)
                         ft_strlcat(str_arg, "0", ft_strlen(str_arg) + 2);
                     ft_strlcat(str_arg, tmp, ft_strlen(tmp) + ft_strlen(str_arg) + 2);
@@ -82,13 +82,41 @@ int ft_printf(const char *string, ...)
                 output = dupCatResize(output, str_arg, NULL);
                 free(str_arg);
             }
-            else
-                return (-1); /* NO EXIGENCE MET, OPERATOR NOT RECOGNIZED */
+            else if (handle_ex2cases(pt) == 3)
+            {
+                x = 0;
+                if (ft_isdigit(*pt))
+                {
+                    tmp = ft_itoa(va_arg(args, int));
+                    x = ft_atoi(pt) - ft_strlen(tmp);
+                    if (x < 0)
+                        x = 0;
+                    str_arg = (char *)ft_calloc(x + ft_strlen(tmp) + 1, sizeof(char));
+                    while (x-- > 0)
+                        ft_strlcat(str_arg, "0", ft_strlen(str_arg) + 2);
+                    ft_strlcat(str_arg, tmp, ft_strlen(tmp) + ft_strlen(str_arg) + 2);
+                }
+                else
+                {
+                    x = va_arg(args, int);
+                    tmp = ft_itoa(va_arg(args, int));
+                    x = x - ft_strlen(tmp);
+                    if (x < 0)
+                        x = 0;
+                    str_arg = (char *)ft_calloc(x + ft_strlen(tmp) + 1, sizeof(char));
+                    while (x-- > 0)
+                        ft_strlcat(str_arg, "0", ft_strlen(str_arg) + 2);
+                    ft_strlcat(str_arg, tmp, ft_strlen(tmp) + ft_strlen(str_arg) + 2);
+                }
+                output = dupCatResize(output, str_arg, NULL);
+                free(str_arg);
+            }
         }
-        pt = strchr_whitespace(pt);
+        else
+            return (-1); /* NO EXIGENCE MET, OPERATOR NOT RECOGNIZED */
+    pt = strchr_whitespace(pt);
     }
-    if (pt)
-        output = dupCatResize(output, pt, NULL);
+    output = dupCatResize(output, pt, NULL);
     va_end(args);
     ft_putstr(output);
     i = ft_strlen(output);

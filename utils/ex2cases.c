@@ -34,10 +34,12 @@ int ex2case2(char *pt)
 }
 
 int ex2case3(char *pt)
-{
-    if (is_digit_or_wildcard(pt) 
-        && pt[1] == '.' 
-        && is_diuxX(pt[2]))
+{ 
+    int i;
+    
+    i = is_digit_or_wildcard(pt);
+    if (i && pt[i] == '.' 
+        && is_diuxX(pt[i + 1]))
         return (1);
     return (0);
 }

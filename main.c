@@ -15,7 +15,8 @@ int main(void)
     //ft_printf("Hello %d %d %d\n", 15 ,16,17);
     //ft_printf("%x", 4859);
     //ft_printf("%u",45468465);
-    ft_printf("%.6d test %.6d test\n", 15, 15);
-
+    //ft_printf("%.6d test %.6d test\n", 15, 15);
+    ft_printf("%6.d\n",15);
+ft_printf("%6.d %6.d\n",15,15);
     return (0);
 }
