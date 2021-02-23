@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 14:40:36 by amaroni           #+#    #+#             */
-/*   Updated: 2021/02/23 09:47:09 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/02/23 10:07:07 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ int ft_printf(const char *string, ...)
             if (*pt == '%')
                 i--;
             else if (ft_isspace((int)pt[1]) || !pt[1])
-            {
+			{
                 str_arg = convert_ex1(pt, args);
                 output = dupCatResize(output, str_arg, NULL);
                 free(str_arg);
-            }
+			}
             else
                 return (-1); /*ERROR WITH THE SYMBOL THAT COMES AFTER %X[] */
         }
@@ -118,11 +118,6 @@ int ft_printf(const char *string, ...)
             }
 			else 
 			{
-                int field_width;
-                int precision;
-                int nb_space;
-                int nb_zero;
-
                 if(ft_isdigit(pt[1]))
                     field_width = ft_atoi(pt);
                 else

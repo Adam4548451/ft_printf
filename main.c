@@ -5,8 +5,9 @@
 int main(void)
 {
     #ifdef TEST
-ft_printf("%6.d %6.d\n",15,15);
-printf("%6.d %6.d\n",15,15);
+    ft_printf("Hello %%\n", "my friend!");
+    ft_printf("Hello %d %d %d\n", 15 ,16,17);
+    ft_printf("%x\n", 4859);
     #endif
 /*
     ft_printf("Hello %%\n", "my friend!");
