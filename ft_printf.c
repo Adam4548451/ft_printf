@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 14:40:36 by amaroni           #+#    #+#             */
-/*   Updated: 2021/02/23 09:35:50 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/02/23 09:47:09 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,30 +75,23 @@ int ft_printf(const char *string, ...)
             }
             else if (handle_ex2cases(pt) == 3)
             {
-                precision = 0;
                 if (ft_isdigit(*pt))
                 {
                     tmp = ft_itoa(va_arg(args, int));
-                    precision = ft_atoi(pt) - ft_strlen(tmp);
-                    if (precision < 0)
+                    if ((precision = ft_atoi(pt) - ft_strlen(tmp)) < 0)
                         precision = 0;
-                    str_arg = (char *)ft_calloc(precision + ft_strlen(tmp) + 1, sizeof(char));
-                    while (precision-- > 0)
-                        ft_strlcat(str_arg, "0", ft_strlen(str_arg) + 2);
-                    ft_strlcat(str_arg, tmp, ft_strlen(tmp) + ft_strlen(str_arg) + 2);
                 }
                 else
                 {
                     precision = va_arg(args, int);
                     tmp = ft_itoa(va_arg(args, int));
-                    precision = precision - ft_strlen(tmp);
-                    if (precision < 0)
+                    if ((precision = precision - ft_strlen(tmp)) < 0)
                         precision = 0;
+                }
                     str_arg = (char *)ft_calloc(precision + ft_strlen(tmp) + 1, sizeof(char));
                     while (precision-- > 0)
-                        ft_strlcat(str_arg, "0", ft_strlen(str_arg) + 2);
+                        ft_strlcat(str_arg, " ", ft_strlen(str_arg) + 2);
                     ft_strlcat(str_arg, tmp, ft_strlen(tmp) + ft_strlen(str_arg) + 2);
-                }
             }
             else if (handle_ex2cases(pt) == 2)
             {
