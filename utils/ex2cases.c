@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:49:12 by amaroni           #+#    #+#             */
-/*   Updated: 2021/02/17 13:49:14 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/02/23 11:22:19 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,10 @@ int ex2case5(char *pt)
     return (0);
 }
 
-//Rajouter cas 6 avec pt[0] digit et pt[1] diuxX
+int ex2case6(char *pt)
+{
+	return (ft_isdigit(pt[0]));
+}
 
 int handle_ex2cases(char *pt)
 {
@@ -80,6 +83,8 @@ int handle_ex2cases(char *pt)
         return (4);
     else if (ex2case5(pt))
         return (5);
+	else if (ex2case6(pt))
+		return (6);
     else
         return (0);
 }

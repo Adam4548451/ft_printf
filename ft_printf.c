@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 14:40:36 by amaroni           #+#    #+#             */
-/*   Updated: 2021/02/23 10:07:07 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/02/23 11:33:06 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ int ft_printf(const char *string, ...)
         else if (isExigence2(*pt))
         {
             //ajouter gestion des negatifs
-            if (handle_ex2cases(pt) == 5)
+			if (handle_ex2cases(pt) == 6)
+			{
+			}
+			else if (handle_ex2cases(pt) == 5)
                 str_arg = convert_ex1(++pt, args);
             else if (handle_ex2cases(pt) == 4)
             {
