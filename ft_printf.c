@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 14:40:36 by amaroni           #+#    #+#             */
-/*   Updated: 2021/02/10 14:40:38 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/02/23 09:04:20 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,34 @@ int ft_printf(const char *string, ...)
                     ft_strlcat(str_arg, "0", ft_strlen(str_arg) + 2);
                 ft_strlcat(str_arg, tmp, ft_strlen(tmp) + ft_strlen(str_arg) + 2);
             }
+			else 
+			{
+                int field_width;
+                int precision;
+                int nb_space;
+                int nb_zero;
+
+                if(ft_isdigit(pt[1]))
+                    field_width = ft_atoi(pt);
+                else
+                    field_width = va_arg(args, int);
+                if(ft_isdigit(pt[3]))
+                    precision = ft_atoi(pt + 3);
+                else
+                    precision = va_arg(args, int);
+                tmp = ft_itoa(va_arg(args, int));
+                if ((nb_zero = precision - ft_strlen(tmp)) < 0)
+                    nb_zero = 0;
+                if ((nb_space = field_width - precision) < 0)
+                    nb_space = 0;
+                str_arg = (char *)ft_calloc(nb_zero + nb_space + ft_strlen(tmp) + 1, sizeof(char));
+                while (nb_space-- > 0)
+                    ft_strlcat(str_arg, " ", ft_strlen(str_arg) + 2);
+                while (nb_zero-- > 0)
+                    ft_strlcat(str_arg, "0", ft_strlen(str_arg) + 2);
+                ft_strlcat(str_arg, tmp, ft_strlen(tmp) + ft_strlen(str_arg) + 2);
+				
+			}
                 output = dupCatResize(output, str_arg, NULL);
                 free(str_arg);
         }

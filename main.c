@@ -18,7 +18,9 @@ int main(void)
     //ft_printf("%.6d test %.6d test\n", 15, 15);
     //ft_printf("%6.d\n",15);
 //ft_printf("%6.d %6.d\n",15,15);
-ft_printf("%*.*d\n",9,6,486);
-printf("%*.*d\n",9,6,486);
+//ft_printf("%*.*d\n",9,6,486);
+//printf("%*.*d\n",9,6,486);
+ft_printf("%-*.*d\n", 9,6,486);
+printf("%-*.*d\n", 9,6,486);
     return (0);
 }
