@@ -32,8 +32,10 @@ bonus:
 	ranlib $(NAME
 
 test:
-	$(CC) -fsanitize=address $(SRC)
+	$(CC) -fsanitize=address -g $(SRC)
 	./a.out | cat -e
 debug:
 	$(CC) -g $(SRC)
-	gdb ./a.out
+
+lldb: debug
+	lldb ./a.out

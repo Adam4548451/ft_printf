@@ -25,9 +25,14 @@ int ex2case1(char *pt)
 
 int ex2case2(char *pt)
 {
-    if (is_digit_or_wildcard(pt) 
+    int field_width;
+    int precision;
+
+    field_width = is_digit_or_wildcard(pt);
+    precision = is_digit_or_wildcard(pt + 2);
+    if (field_width
         && pt[1] == '.'
-        && is_digit_or_wildcard(pt + 2) 
+        && precision
         && is_diuxX(pt[3]))
         return (1);
     return (0);
@@ -61,6 +66,7 @@ int ex2case5(char *pt)
     return (0);
 }
 
+//Rajouter cas 6 avec pt[0] digit et pt[1] diuxX
 
 int handle_ex2cases(char *pt)
 {
