@@ -35,4 +35,6 @@ int handle_ex2cases(char *pt);
 int is_digit_or_wildcard(char *pt);
 int is_diuxX(char ch);
 char    *strchr_whitespace(char *pt);
+void catpositive(int nb_space, int nb_zero, char *dst, char *src);
+void catnegative(int nb_space, int nb_zero, char *dst, char *src);
 #endif

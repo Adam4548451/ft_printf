@@ -24,7 +24,9 @@ int ft_printf(const char *string, ...)
 	int precision;
 	int nb_space;
 	int nb_zero;
+    int negative;
 
+    negative = 0;
     pt = (char *)string;
     output = NULL;
     va_list args;
@@ -51,8 +53,22 @@ int ft_printf(const char *string, ...)
         else if (isExigence2(*pt))
         {
             //ajouter gestion des negatifs
+            if (*pt == '-')
+            {
+                negative = 1;
+                pt++;
+            }
+            //-----------------------------------
 			if (handle_ex2cases(pt) == 6)
 			{
+                tmp = ft_itoa(va_arg(args, int));
+                if ((nb_space = ft_atoi(pt) - ft_strlen(tmp)) < 0)
+                    nb_space = 0;
+                str_arg = (char *)ft_calloc(nb_space + ft_strlen(tmp) + 1, sizeof(char));
+                if (negative)
+                    catnegative(nb_space,0,str_arg,tmp);
+                else
+                    catpositive(nb_space,0,str_arg,tmp);
 			}
 			else if (handle_ex2cases(pt) == 5)
                 str_arg = convert_ex1(++pt, args);
@@ -142,7 +158,10 @@ int ft_printf(const char *string, ...)
                 ft_strlcat(str_arg, tmp, ft_strlen(tmp) + ft_strlen(str_arg) + 2);
 				
 			}
-                output = dupCatResize(output, str_arg, NULL);
+            output = dupCatResize(output, str_arg, NULL);
+            if (tmp)
+                free(tmp);
+            if (str_arg)
                 free(str_arg);
         }
         else

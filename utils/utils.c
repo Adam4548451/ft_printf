@@ -91,3 +91,22 @@ char    *strchr_whitespace(char *pt)
     else 
         return (NULL);
 }
+
+void catpositive(int nb_space, int nb_zero, char *dst, char *src)
+{
+    while (nb_space-- > 0)
+        ft_strlcat(dst, " ", ft_strlen(dst) + 2);
+    while (nb_zero-- > 0)
+        ft_strlcat(dst, "0", ft_strlen(dst) + 2);
+    ft_strlcat(dst, src, ft_strlen(src) + ft_strlen(dst) + 2);
+}
+
+
+void catnegative(int nb_space, int nb_zero, char *dst, char *src)
+{
+    while (nb_zero-- > 0)
+        ft_strlcat(dst, "0", ft_strlen(dst) + 2);
+    ft_strlcat(dst, src, ft_strlen(src) + ft_strlen(dst) + 2);
+    while (nb_space-- > 0)
+        ft_strlcat(dst, " ", ft_strlen(dst) + 2);
+}
