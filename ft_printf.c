@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 14:40:36 by amaroni           #+#    #+#             */
-/*   Updated: 2021/02/23 09:26:46 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/02/23 09:35:50 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,6 @@ int ft_printf(const char *string, ...)
                     tmp = ft_itoa(va_arg(args, int));
                     if ((precision = ft_atoi(pt + 1) - ft_strlen(tmp)) < 0)
                         precision = 0;
-                    str_arg = (char *)ft_calloc(precision + ft_strlen(tmp) + 1, sizeof(char));
-                    while (precision-- > 0)
-                        ft_strlcat(str_arg, "0", ft_strlen(str_arg) + 2);
-                    ft_strlcat(str_arg, tmp, ft_strlen(tmp) + ft_strlen(str_arg) + 2);
                 }
                 else
                 {
@@ -71,11 +67,11 @@ int ft_printf(const char *string, ...)
                     tmp = ft_itoa(va_arg(args, int));
                     if ((precision = precision - ft_strlen(tmp)) < 0)
                         precision = 0;
+                }
                     str_arg = (char *)ft_calloc(precision + ft_strlen(tmp) + 1, sizeof(char));
                     while (precision-- > 0)
                         ft_strlcat(str_arg, "0", ft_strlen(str_arg) + 2);
                     ft_strlcat(str_arg, tmp, ft_strlen(tmp) + ft_strlen(str_arg) + 2);
-                }
             }
             else if (handle_ex2cases(pt) == 3)
             {

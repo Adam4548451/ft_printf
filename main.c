@@ -1,15 +1,14 @@
 #include "ft_printf.h"
 #include <stdio.h>
-//#define TEST
+#define TEST
 
 int main(void)
 {
     #ifdef TEST
-    printf("%-.5d\n",5);
-    printf("%+.5d\n",5);
-    printf("%+2.1d\n",5655);
+    ft_printf("%.6d test %.6d test\n", 15, 15);
+    printf("%.6d test %.6d test\n", 15, 15);
     #endif
-
+/*
     ft_printf("Hello %%\n", "my friend!");
     ft_printf("Hello %d %d %d\n", 15 ,16,17);
     printf("Hello %d %d %d\n", 15 ,16,17);
@@ -27,5 +26,6 @@ ft_printf("%*.*d\n",9,6,486);
 printf("%*.*d\n",9,6,486);
 ft_printf("%-*.*d\n", 9,6,486);
 printf("%-*.*d\n", 9,6,486);
+*/
     return (0);
 }
