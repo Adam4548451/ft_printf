@@ -36,7 +36,11 @@ clean_ftprintf:
 %.o:%.c
 	$(CC) $(FLAGS) -c $^ -o $@
 
-all: libft utils ftprintf
+$(NAME):libft utils ftprintf
+	ar rc $(NAME) $(OBJ_LIBFT) $(OBJ_UTILS) $(OBJ_FTPRINTF)
+	ranlib $(NAME)
+
+all: $(NAME)
 
 clean: clean_libft clean_utils clean_ftprintf
 
@@ -45,10 +49,6 @@ fclean: clean
 
 re: fclean all
 
-bonus:
-	$(CC) -c $(FLAGS) $(SRC_BONUS)
-	ar rc $(NAME) $(OBJ_BONUS)
-	ranlib $(NAME
 
 
 #DEBUG AND TEST
