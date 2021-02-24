@@ -19,7 +19,6 @@ int ft_printf(const char *string, ...)
     char *output;
     char *str_arg;
     char *tmp;
-    int x;
 	int field_width;
 	int precision;
 	int nb_space;
