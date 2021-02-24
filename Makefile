@@ -15,9 +15,11 @@ clean_libft:
 
 #UTILS
 #........................................................................................................................................................................................................
-SRC_UTILS = ./utils/conversion_ex1.c ./utils/conversion_ex2.c ./utils/ex2cases.c ./utils/exigences.c ./utils/utils.c 
-OBJ_UTILS = ./utils/conversion_ex1.o ./utils/conversion_ex2.o ./utils/ex2cases.o ./utils/exigences.o ./utils/utils.o 
+SRC_UTILS = ./utils/conversion_ex1.c ./utils/ex2cases.c ./utils/exigences.c ./utils/utils.c 
+OBJ_UTILS = ./utils/conversion_ex1.o ./utils/ex2cases.o ./utils/exigences.o ./utils/utils.o 
 utils: $(OBJ_UTILS)
+clean_utils:
+	rm -rf ./utils/*.o
 #........................................................................................................................................................................................................
 
 
@@ -26,7 +28,7 @@ utils: $(OBJ_UTILS)
 
 all: libft
 
-clean: clean_libft
+clean: clean_libft clean_utils
 
 fclean: clean
 	rm -f $(NAME)
