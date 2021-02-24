@@ -137,6 +137,7 @@ int ft_printf(const char *string, ...)
                 else
                     catpositive(nb_space,nb_zero,str_arg,tmp);
             }
+            /* Le cas 1 est possiblement obsolete car traité par le cas 2
 			else 
 			{
                 if(ft_isdigit(pt[1]))
@@ -160,6 +161,7 @@ int ft_printf(const char *string, ...)
                 ft_strlcat(str_arg, tmp, ft_strlen(tmp) + ft_strlen(str_arg) + 2);
 				
 			}
+            */
             output = dupCatResize(output, str_arg, NULL);
             if (tmp)
                 free(tmp);
