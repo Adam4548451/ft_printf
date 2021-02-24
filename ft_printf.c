@@ -26,6 +26,7 @@ int ft_printf(const char *string, ...)
 	int nb_zero;
     int negative;
 
+    tmp = NULL;
     negative = 0;
     pt = (char *)string;
     output = NULL;
@@ -108,9 +109,10 @@ int ft_printf(const char *string, ...)
                         precision = 0;
                 }
                     str_arg = (char *)ft_calloc(precision + ft_strlen(tmp) + 1, sizeof(char));
-                    while (precision-- > 0)
-                        ft_strlcat(str_arg, " ", ft_strlen(str_arg) + 2);
-                    ft_strlcat(str_arg, tmp, ft_strlen(tmp) + ft_strlen(str_arg) + 2);
+                if (negative)
+                    catnegative(precision,0,str_arg,tmp);
+                else
+                    catpositive(precision,0,str_arg,tmp);
             }
             else if (handle_ex2cases(pt) == 2)
             {

@@ -5,8 +5,10 @@
 int main(void)
 {
     #ifdef TEST
-    ft_printf("%5d\n",46);
-    ft_printf("%-5d\n",46);
+    ft_printf("%-6.d\n",1);
+    printf("%-6.d\n",1);
+    ft_printf("%6.d\n",1);
+    printf("%6.d\n",1);
     #endif
 /*
     ft_printf("Hello %%\n", "my friend!");
