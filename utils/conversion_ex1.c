@@ -84,7 +84,7 @@ char *convert_ex1(char *pt, va_list args)
     else if (*pt == 'u')
         str_arg = ft_uitoa(va_arg(args, unsigned int));
     else 
-        /* Error */ ;
+        /* Error */ return (NULL);
     return (str_arg);
 }
 
