@@ -4,13 +4,13 @@
 
 int main(void)
 {
-    #ifdef TEST
-    ft_printf("%-6.d\n",1);
-    printf("%-6.d\n",1);
-    ft_printf("%6.d\n",1);
-    printf("%6.d\n",1);
-    #endif
-/*
+#ifdef TEST
+    ft_printf("%-*.*d\n", 9, 6, 486);
+    ft_printf("%*.*d\n", 9, 6, 486);
+    printf("%-*.*d\n", 9, 6, 486);
+    printf("%*.*d\n", 9, 6, 486);
+#endif
+    /*
     ft_printf("Hello %%\n", "my friend!");
     ft_printf("Hello %d %d %d\n", 15 ,16,17);
     printf("Hello %d %d %d\n", 15 ,16,17);

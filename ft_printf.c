@@ -131,11 +131,11 @@ int ft_printf(const char *string, ...)
                 if ((nb_space = field_width - precision) < 0)
                     nb_space = 0;
                 str_arg = (char *)ft_calloc(nb_zero + nb_space + ft_strlen(tmp) + 1, sizeof(char));
-                while (nb_space-- > 0)
-                    ft_strlcat(str_arg, " ", ft_strlen(str_arg) + 2);
-                while (nb_zero-- > 0)
-                    ft_strlcat(str_arg, "0", ft_strlen(str_arg) + 2);
-                ft_strlcat(str_arg, tmp, ft_strlen(tmp) + ft_strlen(str_arg) + 2);
+
+                if (negative)
+                    catnegative(nb_space,nb_zero,str_arg,tmp);
+                else
+                    catpositive(nb_space,nb_zero,str_arg,tmp);
             }
 			else 
 			{
