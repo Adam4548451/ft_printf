@@ -5,10 +5,7 @@
 int main(void)
 {
 #ifdef TEST
-    ft_printf("%-*.*d\n", 9, 6, 486);
-    ft_printf("%*.*d\n", 9, 6, 486);
-    printf("%-*.*d\n", 9, 6, 486);
-    printf("%*.*d\n", 9, 6, 486);
+    printf("%ca\n", 'd');
 #endif
     /*
     ft_printf("Hello %%\n", "my friend!");

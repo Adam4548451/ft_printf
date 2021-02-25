@@ -54,7 +54,7 @@ re: fclean all
 #DEBUG AND TEST
 #........................................................................................................................................................................................................
 test:
-	$(CC) -fsanitize=address -g $(SRC)
+	$(CC) -fsanitize=address -g $(SRC_LIBFT) $(SRC_UTILS) $(SRC_FTPRINTF) main.c
 	./a.out | cat -e
 
 debug:
