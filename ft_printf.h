@@ -22,7 +22,7 @@ int isExigence1(char ch);
 int isExigence2(char ch);
 int count_character(char *string, char character);
 char *dupCatResize(char *old, char *start, char *end);
-char *convert_ex1(char *pt, va_list args);
+char *convert_ex1(char *pt, va_list args, char *next_pt);
 char convert_ex1_hex_table(unsigned long input, char *pt);
 char *int2hexstring(unsigned long input, char *pt, size_t size);
 

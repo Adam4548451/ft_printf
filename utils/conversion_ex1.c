@@ -61,13 +61,13 @@ Switching require that you know the type the argument used, the only way we have
 Thus this function must accept two entries: the operator as a char and the list or arguments as a va_list.
 It will be necessary to free the memory allocated for str_arg after concatenation (certainly in the caller)
 */
-char *convert_ex1(char *pt, va_list args)
+char *convert_ex1(char *pt, va_list args, char *next_pt)
 {
     char *str_arg;
     unsigned long addr;
     if (*pt == 'c')
     {
-        str_arg = (char*)ft_calloc(1,sizeof(*str_arg));
+        str_arg = (char*)ft_calloc(2,sizeof(*str_arg));
         str_arg[0] = (char)va_arg(args, int);
     }
     else if (*pt == 'd' || *pt == 'i')
@@ -85,6 +85,7 @@ char *convert_ex1(char *pt, va_list args)
         str_arg = ft_uitoa(va_arg(args, unsigned int));
     else 
         /* Error */ return (NULL);
+    next_pt = pt + 1;
     return (str_arg);
 }
 

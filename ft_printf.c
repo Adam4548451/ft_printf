@@ -24,10 +24,12 @@ int ft_printf(const char *string, ...)
 	int nb_space;
 	int nb_zero;
     int negative;
+    char *next_pt;
 
     tmp = NULL;
     negative = 0;
     pt = (char *)string;
+    next_pt = NULL;
     output = NULL;
     va_list args;
     va_start(args, string);
@@ -41,14 +43,12 @@ int ft_printf(const char *string, ...)
         {
             if (*pt == '%')
                 i--;
-            else if (ft_isspace((int)pt[1]) || !pt[1])
-			{
-                str_arg = convert_ex1(pt, args);
+            else
+            {
+                str_arg = convert_ex1(pt, args, next_pt);
                 output = dupCatResize(output, str_arg, NULL);
                 free(str_arg);
-			}
-            else
-                return (-1); /*ERROR WITH THE SYMBOL THAT COMES AFTER %X[] */
+            }
         }
         else if (isExigence2(*pt))
         {
@@ -71,7 +71,7 @@ int ft_printf(const char *string, ...)
                     catpositive(nb_space,0,str_arg,tmp);
 			}
 			else if (handle_ex2cases(pt) == 5)
-                str_arg = convert_ex1(++pt, args);
+                str_arg = convert_ex1(++pt, args, next_pt);
             else if (handle_ex2cases(pt) == 4)
             {
                 if (ft_isdigit(pt[1]))
@@ -169,7 +169,7 @@ int ft_printf(const char *string, ...)
         }
         else
             return (-1); /* NO EXIGENCE MET, OPERATOR NOT RECOGNIZED */
-    pt = strchr_whitespace(pt);
+    pt = next_pt;
     }
     output = dupCatResize(output, pt, NULL);
     va_end(args);

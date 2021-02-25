@@ -5,7 +5,8 @@
 int main(void)
 {
 #ifdef TEST
-    printf("%ca\n", 'd');
+    //printf("%1.5dx\n",486);
+    ft_printf("%1.5dx\n",486);
 #endif
     /*
     ft_printf("Hello %%\n", "my friend!");
