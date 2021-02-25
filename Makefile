@@ -2,6 +2,7 @@ CC = clang
 FLAGS = -Wall -Wextra -Werror
 NAME = ft_printf.a
 
+SRC_ALL =  $(SRC_LIBFT) $(SRC_UTILS) $(SRC_FTPRINTF)
 
 
 #LIBFT
@@ -54,12 +55,15 @@ re: fclean all
 #DEBUG AND TEST
 #........................................................................................................................................................................................................
 test:
-	$(CC) -fsanitize=address -g $(SRC_LIBFT) $(SRC_UTILS) $(SRC_FTPRINTF) main.c
+	$(CC) -fsanitize=address -g $(SRC_ALL) main.c
 	./a.out | cat -e
 
 debug:
-	$(CC) -g $(SRC)
+	$(CC) -g $(SRC_ALL) main.c
 
 lldb: debug
 	lldb ./a.out
+
+gdb: debug
+	gdb ./a.out
 #........................................................................................................................................................................................................
