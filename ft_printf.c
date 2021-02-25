@@ -79,14 +79,14 @@ int ft_printf(const char *string, ...)
             {
                 if (ft_isdigit(pt[1]))
                 {
-                    tmp = ft_itoa(va_arg(args, int));
+                    tmp = convert_ex1(pt, args, &next_pt);
                     if ((precision = ft_atoi(pt + 1) - ft_strlen(tmp)) < 0)
                         precision = 0;
                 }
                 else
                 {
                     precision = va_arg(args, int);
-                    tmp = ft_itoa(va_arg(args, int));
+                    tmp = convert_ex1(pt, args, &next_pt);
                     if ((precision = precision - ft_strlen(tmp)) < 0)
                         precision = 0;
                 }
@@ -99,14 +99,19 @@ int ft_printf(const char *string, ...)
             {
                 if (ft_isdigit(*pt))
                 {
-                    tmp = ft_itoa(va_arg(args, int));
-                    if ((precision = ft_atoi(pt) - ft_strlen(tmp)) < 0)
+                    precision = ft_atoi(pt);
+                    while (!isExigence1(*pt))
+                        pt++;
+                    tmp = convert_ex1(pt, args, &next_pt);
+                    if ((precision = precision - ft_strlen(tmp)) < 0)
                         precision = 0;
                 }
                 else
                 {
                     precision = va_arg(args, int);
-                    tmp = ft_itoa(va_arg(args, int));
+                    while (!isExigence1(*pt))
+                        pt++;
+                    tmp = convert_ex1(pt, args, &next_pt);
                     if ((precision = precision - ft_strlen(tmp)) < 0)
                         precision = 0;
                 }
@@ -127,13 +132,14 @@ int ft_printf(const char *string, ...)
                     precision = ft_atoi(pt + 2);
                 else
                     precision = va_arg(args, int);
-                tmp = ft_itoa(va_arg(args, int));
+                while (!isExigence1(*pt))
+                    pt++;
+                tmp = convert_ex1(pt, args, &next_pt);
                 if ((nb_zero = precision - ft_strlen(tmp)) < 0)
                     nb_zero = 0;
                 if ((nb_space = field_width - precision) < 0)
                     nb_space = 0;
                 str_arg = (char *)ft_calloc(nb_zero + nb_space + ft_strlen(tmp) + 1, sizeof(char));
-
                 if (negative)
                     catnegative(nb_space,nb_zero,str_arg,tmp);
                 else
