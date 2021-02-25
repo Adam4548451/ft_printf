@@ -5,8 +5,8 @@
 int main(void)
 {
 #ifdef TEST
-    //printf("%1.5dx\n",486);
-    ft_printf("%1.5dx\n",486);
+    printf("%6xd\n", 56);
+    ft_printf("%6xd\n", 56);
 #endif
     /*
     ft_printf("Hello %%\n", "my friend!");

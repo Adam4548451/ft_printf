@@ -45,7 +45,7 @@ int ft_printf(const char *string, ...)
                 i--;
             else
             {
-                str_arg = convert_ex1(pt, args, next_pt);
+                str_arg = convert_ex1(pt, args, &next_pt);
                 output = dupCatResize(output, str_arg, NULL);
                 free(str_arg);
             }
@@ -61,8 +61,11 @@ int ft_printf(const char *string, ...)
             //-----------------------------------
 			if (handle_ex2cases(pt) == 6)
 			{
-                tmp = ft_itoa(va_arg(args, int));
-                if ((nb_space = ft_atoi(pt) - ft_strlen(tmp)) < 0)
+                nb_space = ft_atoi(pt);
+                while (!isExigence1(*pt))
+                    pt++;
+                tmp = convert_ex1(pt, args, &next_pt);
+                if ((nb_space = nb_space - ft_strlen(tmp)) < 0)
                     nb_space = 0;
                 str_arg = (char *)ft_calloc(nb_space + ft_strlen(tmp) + 1, sizeof(char));
                 if (negative)
@@ -71,7 +74,7 @@ int ft_printf(const char *string, ...)
                     catpositive(nb_space,0,str_arg,tmp);
 			}
 			else if (handle_ex2cases(pt) == 5)
-                str_arg = convert_ex1(++pt, args, next_pt);
+                str_arg = convert_ex1(++pt, args, &next_pt);
             else if (handle_ex2cases(pt) == 4)
             {
                 if (ft_isdigit(pt[1]))
