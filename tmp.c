@@ -42,9 +42,10 @@ int ft_printf(const char *string, ...)
                     }
                     else if (handle_ex2cases(pt) == 4)
                     {
-                       if(ft_isdigit(pt[1]))
-                        nbzero = atoi_next_pt(++pt, &pt);
-
+                        if (ft_isdigit(pt[1]))
+                            nbzero = atoi_next_pt(++pt, &pt);
+                        else
+                            nbzero = 
                     }
                     else if (handle_ex2cases(pt) == 3)
                     else if (handle_ex2cases(pt) == 2)
