@@ -5,7 +5,8 @@
 int main(void)
 {
 #ifdef TEST
-ft_printf("%i\n",8);
+printf("%6.i\n",8);
+printf("%.6i\n",8);
 //ft_printf("%-i\n",8);
 #endif
     /*

@@ -7,6 +7,7 @@ int ft_printf(const char *string, ...)
     char *tmp;
     int negative;
     int nbspace;
+    int nbzero;
     va_list args;
     va_start(args, string);
 
@@ -40,6 +41,11 @@ int ft_printf(const char *string, ...)
 
                     }
                     else if (handle_ex2cases(pt) == 4)
+                    {
+                       if(ft_isdigit(pt[1]))
+                        nbzero = atoi_next_pt(++pt, &pt);
+
+                    }
                     else if (handle_ex2cases(pt) == 3)
                     else if (handle_ex2cases(pt) == 2)
                     else
