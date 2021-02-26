@@ -5,7 +5,8 @@
 int main(void)
 {
 #ifdef TEST
-ft_printf("000000486 attendu: %*.*d\n", 6,9,486);
+ft_printf("%i\n",8);
+//ft_printf("%-i\n",8);
 #endif
     /*
     ft_printf("Hello %%\n", "my friend!");

@@ -39,16 +39,13 @@ int ft_printf(const char *string, ...)
         output = dupCatResize(output, pt, ft_strchr(pt, (int)'%'));
         if (!(pt = ft_strchr(pt, (int)'%')))
             break;
+        if (*pt == '%')
+            i--;
         if (isExigence1(*(++pt)))
         {
-            if (*pt == '%')
-                i--;
-            else
-            {
-                str_arg = convert_ex1(pt, args, &next_pt);
-                output = dupCatResize(output, str_arg, NULL);
-                free(str_arg);
-            }
+            str_arg = convert_ex1(pt, args, &next_pt);
+            output = dupCatResize(output, str_arg, NULL);
+            free(str_arg);
         }
         else if (isExigence2(*pt))
         {
