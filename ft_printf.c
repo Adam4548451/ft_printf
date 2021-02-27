@@ -80,6 +80,8 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 	{
 		if (ft_isdigit(*pt))
 			fw = ft_abs(atoi_next_pt(pt, &pt));
+		if(isConvertor(*pt))
+			break;
 		if (*pt == '.')
 		{
 			if (ft_isdigit(*++pt))
@@ -96,8 +98,8 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 		}
 		else if (*pt == '*')
 		{
-			fw = ft_abs(atoi_next_pt(pt, &pt));
-			if (*pt == '.')
+			fw = ft_abs(va_arg(args, int));
+			if (*++pt == '.')
 				if (ft_isdigit(*++pt))
 					precision = ft_abs(atoi_next_pt(pt, &pt));
 				else if (*pt == '*')
@@ -107,7 +109,6 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 				}
 				else if (isConvertor(*pt))
 					break ;
-
 				else 
 					return (NULL);
 			else if (isConvertor(*pt))
@@ -122,7 +123,7 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 	*next_pt = ++pt;
 	if ((precision = precision - ft_strlen(str_arg)) < 0)
 		precision = 0;
-	if ((fw = fw - ft_strlen(str_arg)) < 0)
+	if ((fw = fw - (precision + ft_strlen(str_arg))) < 0)
 		fw = 0;
 	rt = (char*)ft_calloc(fw + precision + ft_strlen(str_arg) + 1, sizeof(*rt));
 	if (negative)
