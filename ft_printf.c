@@ -73,11 +73,11 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 	int precision;
 	char *rt;
 	char *str_arg;
+	fw = 0;
+	precision = 0;
 
 	while (!isConvertor(*pt))
 	{
-		fw = 0;
-		precision = 0;
 		if (ft_isdigit(*pt))
 			fw = ft_abs(atoi_next_pt(pt, &pt));
 		if (*pt == '.')
