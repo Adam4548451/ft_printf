@@ -73,8 +73,8 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 	int precision;
 	char *rt;
 	char *str_arg;
-	fw = 0;
-	precision = 0;
+	fw = 1;
+	precision = 1;
 
 	while (!isConvertor(*pt))
 	{
@@ -121,6 +121,7 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 	}
 	str_arg = conversion(pt,args);
 	*next_pt = ++pt;
+		return ("");
 	if ((precision = precision - ft_strlen(str_arg)) < 0)
 		precision = 0;
 	if ((fw = fw - (precision + ft_strlen(str_arg))) < 0)

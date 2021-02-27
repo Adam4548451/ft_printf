@@ -5,7 +5,8 @@
 int main(void)
 {
 #ifdef TEST
-ft_printf("CASE11: 2 espaces avant 486 : %5d\n",486);
+printf("%0d\n",0);
+ft_printf("%0d\n",0);
 //ft_printf("%-i\n",8);
 #endif
     /*
