@@ -1,186 +1,133 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/10 14:40:36 by amaroni           #+#    #+#             */
-/*   Updated: 2021/02/23 11:33:06 by amaroni          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "ft_printf.h"
 
 int ft_printf(const char *string, ...)
 {
-    int i;
     char *pt;
     char *output;
-    char *str_arg;
     char *tmp;
-	int field_width;
-	int precision;
-	int nb_space;
-	int nb_zero;
+	int len;
     int negative;
-    char *next_pt;
-
-    tmp = NULL;
-    negative = 0;
-    pt = (char *)string;
-    next_pt = NULL;
-    output = NULL;
     va_list args;
     va_start(args, string);
-    i = count_character((char *)string, '%');
-    while (i-- > 0)
+	char *next_pt;
+
+    negative = 0;
+    pt = (char *)string;
+	next_pt = NULL;
+	output = NULL;
+    while (ft_strchr(pt, (int)'%'))
     {
         output = dupCatResize(output, pt, ft_strchr(pt, (int)'%'));
-        if (!(pt = ft_strchr(pt, (int)'%')))
-            break;
-        if (*pt == '%')
-            i--;
-        if (isExigence1(*(++pt)))
+        pt = ft_strchr(pt, (int)'%');
+        if (*(++pt) != '%')
         {
-            str_arg = convert_ex1(pt, args, &next_pt);
-            output = dupCatResize(output, str_arg, NULL);
-            free(str_arg);
-        }
-        else if (isExigence2(*pt))
-        {
-            //ajouter gestion des negatifs
             if (*pt == '-')
             {
                 negative = 1;
                 pt++;
             }
-            //-----------------------------------
-			if (handle_ex2cases(pt) == 6)
-			{
-                nb_space = ft_atoi(pt);
-                while (!isExigence1(*pt))
-                    pt++;
-                tmp = convert_ex1(pt, args, &next_pt);
-                if ((nb_space = nb_space - ft_strlen(tmp)) < 0)
-                    nb_space = 0;
-                str_arg = (char *)ft_calloc(nb_space + ft_strlen(tmp) + 1, sizeof(char));
-                if (negative)
-                    catnegative(nb_space,0,str_arg,tmp);
-                else
-                    catpositive(nb_space,0,str_arg,tmp);
-			}
-			else if (handle_ex2cases(pt) == 5)
-                str_arg = convert_ex1(++pt, args, &next_pt);
-            else if (handle_ex2cases(pt) == 4)
-            {
-                if (ft_isdigit(pt[1]))
-                {
-                    tmp = convert_ex1(pt, args, &next_pt);
-                    if ((precision = ft_atoi(pt + 1) - ft_strlen(tmp)) < 0)
-                        precision = 0;
-                }
-                else
-                {
-                    precision = va_arg(args, int);
-                    tmp = convert_ex1(pt, args, &next_pt);
-                    if ((precision = precision - ft_strlen(tmp)) < 0)
-                        precision = 0;
-                }
-                    str_arg = (char *)ft_calloc(precision + ft_strlen(tmp) + 1, sizeof(char));
-                    while (precision-- > 0)
-                        ft_strlcat(str_arg, "0", ft_strlen(str_arg) + 2);
-                    ft_strlcat(str_arg, tmp, ft_strlen(tmp) + ft_strlen(str_arg) + 2);
-            }
-            else if (handle_ex2cases(pt) == 3)
-            {
-                if (ft_isdigit(*pt))
-                {
-                    precision = ft_atoi(pt);
-                    while (!isExigence1(*pt))
-                        pt++;
-                    tmp = convert_ex1(pt, args, &next_pt);
-                    if ((precision = precision - ft_strlen(tmp)) < 0)
-                        precision = 0;
-                }
-                else
-                {
-                    precision = va_arg(args, int);
-                    while (!isExigence1(*pt))
-                        pt++;
-                    tmp = convert_ex1(pt, args, &next_pt);
-                    if ((precision = precision - ft_strlen(tmp)) < 0)
-                        precision = 0;
-                }
-                    str_arg = (char *)ft_calloc(precision + ft_strlen(tmp) + 1, sizeof(char));
-                if (negative)
-                    catnegative(precision,0,str_arg,tmp);
-                else
-                    catpositive(precision,0,str_arg,tmp);
-            }
-            else if (handle_ex2cases(pt) == 2)
-            {
-
-                if(ft_isdigit(pt[0]))
-                    field_width = ft_atoi(pt);
-                else
-                    field_width = va_arg(args, int);
-                if(ft_isdigit(pt[2]))
-                    precision = ft_atoi(pt + 2);
-                else
-                    precision = va_arg(args, int);
-                while (!isExigence1(*pt))
-                    pt++;
-                tmp = convert_ex1(pt, args, &next_pt);
-                if ((nb_zero = precision - ft_strlen(tmp)) < 0)
-                    nb_zero = 0;
-                if ((nb_space = field_width - precision) < 0)
-                    nb_space = 0;
-                str_arg = (char *)ft_calloc(nb_zero + nb_space + ft_strlen(tmp) + 1, sizeof(char));
-                if (negative)
-                    catnegative(nb_space,nb_zero,str_arg,tmp);
-                else
-                    catpositive(nb_space,nb_zero,str_arg,tmp);
-            }
-            /* Le cas 1 est possiblement obsolete car traité par le cas 2
-			else 
-			{
-                if(ft_isdigit(pt[1]))
-                    field_width = ft_atoi(pt);
-                else
-                    field_width = va_arg(args, int);
-                if(ft_isdigit(pt[3]))
-                    precision = ft_atoi(pt + 3);
-                else
-                    precision = va_arg(args, int);
-                tmp = ft_itoa(va_arg(args, int));
-                if ((nb_zero = precision - ft_strlen(tmp)) < 0)
-                    nb_zero = 0;
-                if ((nb_space = field_width - precision) < 0)
-                    nb_space = 0;
-                str_arg = (char *)ft_calloc(nb_zero + nb_space + ft_strlen(tmp) + 1, sizeof(char));
-                while (nb_space-- > 0)
-                    ft_strlcat(str_arg, " ", ft_strlen(str_arg) + 2);
-                while (nb_zero-- > 0)
-                    ft_strlcat(str_arg, "0", ft_strlen(str_arg) + 2);
-                ft_strlcat(str_arg, tmp, ft_strlen(tmp) + ft_strlen(str_arg) + 2);
-				
-			}
-            */
-            output = dupCatResize(output, str_arg, NULL);
-            if (tmp)
-                free(tmp);
-            if (str_arg)
-                free(str_arg);
+			tmp = handle(pt, negative, args, &next_pt);
+            output = dupCatResize(output, tmp, NULL);
         }
-        else
-            return (-1); /* NO EXIGENCE MET, OPERATOR NOT RECOGNIZED */
-    pt = next_pt;
+		pt = next_pt;
     }
-    output = dupCatResize(output, pt, NULL);
-    va_end(args);
-    ft_putstr(output);
-    i = ft_strlen(output);
-    free(output);
-    return (i);
+	if (pt)
+        output = dupCatResize(output, pt, NULL);
+	len = ft_strlen(output);
+	ft_putstr(output);
+	free(output);
+	return (len);
+}
+
+
+
+
+
+int atoi_next_pt(char *string, char **next_pt)
+{
+    char *tmp;
+    int rt;
+
+    rt = 0;
+    tmp = string;
+    while (ft_isdigit(*tmp))
+        tmp++;
+    if (tmp != string)
+    {
+        rt = ft_atoi(string);
+        *next_pt = tmp;
+    }
+    return (rt);
+}
+
+unsigned int ft_abs(int i)
+{
+	if (i >= 0)
+		return ((unsigned int)i);
+	return ((unsigned int)(-i));
+}
+
+char *handle(char *pt, int negative, va_list args, char **next_pt)
+{
+	int fw;
+	int precision;
+	char *rt;
+	char *str_arg;
+
+	while (!isConvertor(*pt))
+	{
+		fw = 0;
+		precision = 0;
+		if (ft_isdigit(*pt))
+			fw = ft_abs(atoi_next_pt(pt, &pt));
+		if (*pt == '.')
+		{
+			if (ft_isdigit(*++pt))
+				precision = ft_abs(atoi_next_pt(pt, &pt));
+			else if(*pt == '*')
+			{
+				precision = ft_abs(va_arg(args, int));
+				pt++;
+			}
+			else if (isConvertor(*pt))
+				break ;
+			else
+				return (NULL); // Chaine invalide
+		}
+		else if (*pt == '*')
+		{
+			fw = ft_abs(atoi_next_pt(pt, &pt));
+			if (*pt == '.')
+				if (ft_isdigit(*++pt))
+					precision = ft_abs(atoi_next_pt(pt, &pt));
+				else if (*pt == '*')
+				{
+					precision = ft_abs(va_arg(args, int));
+					pt++;
+				}
+				else if (isConvertor(*pt))
+					break ;
+
+				else 
+					return (NULL);
+			else if (isConvertor(*pt))
+				break;
+			else
+				return (NULL);
+		}
+		else
+			return (NULL); // chaine invalide
+	}
+	str_arg = conversion(pt,args);
+	*next_pt = ++pt;
+	if ((precision = precision - ft_strlen(str_arg)) < 0)
+		precision = 0;
+	if ((fw = fw - ft_strlen(str_arg)) < 0)
+		fw = 0;
+	rt = (char*)ft_calloc(fw + precision + ft_strlen(str_arg) + 1, sizeof(*rt));
+	if (negative)
+		catnegative(fw, precision, rt, str_arg);
+	else
+		catpositive(fw, precision, rt, str_arg);
+	return (rt);	
 }

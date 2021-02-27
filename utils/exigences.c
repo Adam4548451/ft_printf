@@ -12,7 +12,7 @@
 
 #include "../ft_printf.h"
 
-int isExigence1(char ch)
+int isConvertor(char ch)
 {
     if (ch == 'c'
     || ch == 's'
@@ -22,18 +22,7 @@ int isExigence1(char ch)
     || ch == 'u'
     || ch == 'x'
     || ch == 'X'
-    || ch == '%')
-        return (1);
-    return (0);
-}
-
-int isExigence2(char ch)
-{
-    if (ch == '+'
-    || ch == '-'
-    || ch == '*'
-    || ft_isdigit((int)ch)
-    || ch == '.')
+    )
         return (1);
     return (0);
 }

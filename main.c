@@ -5,8 +5,7 @@
 int main(void)
 {
 #ifdef TEST
-printf("%6.i\n",8);
-printf("%.6i\n",8);
+ft_printf("CASE8: Trois char de suite: %c%c%c\n", 'a','b','c');
 //ft_printf("%-i\n",8);
 #endif
     /*

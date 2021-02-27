@@ -1,6 +1,6 @@
 IF (CASE5)
     pt++;
-    str_arg = convert_ex1(pt, args);
+    str_arg = conversion(pt, args);
     output = dupCatResize(output, str_arg, NULL);
     free(str_arg)
 ELSE IF (CASE4)

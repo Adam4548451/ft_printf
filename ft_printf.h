@@ -18,12 +18,11 @@
 # include "libft/libft.h"
 int ft_printf(const char *string, ...);
 
-int isExigence1(char ch);
-int isExigence2(char ch);
+int isConvertor(char ch);
 int count_character(char *string, char character);
 char *dupCatResize(char *old, char *start, char *end);
-char *convert_ex1(char *pt, va_list args, char **next_pt);
-char convert_ex1_hex_table(unsigned long input, char *pt);
+char *conversion(char *pt, va_list args);
+char conversion_hex_table(unsigned long input, char *pt);
 char *int2hexstring(unsigned long input, char *pt, size_t size);
 
 int ex2case1(char *pt);
@@ -37,4 +36,7 @@ int is_diuxX(char ch);
 char    *strchr_whitespace(char *pt);
 void catpositive(int nb_space, int nb_zero, char *dst, char *src);
 void catnegative(int nb_space, int nb_zero, char *dst, char *src);
+int atoi_next_pt(char *string, char **next_pt);
+unsigned int ft_abs(int i);
+char *handle(char *pt, int negative, va_list args, char **next_pt);
 #endif

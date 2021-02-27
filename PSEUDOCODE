@@ -15,12 +15,12 @@ while (i-- > 0)
     output = dupCatResize(output, pt, ft_strchr(pt, (int)'%')
     if (!(pt = ft_strchr(pt, (int)'%')))
         break;
-    if (isExigence1(*(pt++)))
+    if (isConvertor(*(pt++)))
         if(*pt == '%')
             i--;
         else if (ft_isspace((int)pt[1]) || !pt[1])
         {
-            str_arg = convert_ex1(pt, args);
+            str_arg = conversion(pt, args);
             output = dupCatResize(output, str_arg, NULL);
             free(str_arg);
         }
