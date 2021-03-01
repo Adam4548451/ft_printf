@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/01 07:13:09 by amaroni           #+#    #+#             */
+/*   Updated: 2021/03/01 09:31:39 by amaroni          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int ft_printf(const char *string, ...)
@@ -73,8 +85,11 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 	int precision;
 	char *rt;
 	char *str_arg;
-	fw = 1;
-	precision = 1;
+	int dot;
+	fw = 0;
+	precision = 0;
+	dot = 0;
+	
 
 	while (!isConvertor(*pt))
 	{
@@ -84,6 +99,7 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 			break;
 		if (*pt == '.')
 		{
+			dot = 1;
 			if (ft_isdigit(*++pt))
 				precision = ft_abs(atoi_next_pt(pt, &pt));
 			else if(*pt == '*')
@@ -100,6 +116,8 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 		{
 			fw = ft_abs(va_arg(args, int));
 			if (*++pt == '.')
+			{
+				dot = 1;
 				if (ft_isdigit(*++pt))
 					precision = ft_abs(atoi_next_pt(pt, &pt));
 				else if (*pt == '*')
@@ -111,25 +129,35 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 					break ;
 				else 
 					return (NULL);
+			}
 			else if (isConvertor(*pt))
 				break;
 			else
 				return (NULL);
 		}
+		else if(*pt == '-')
+			pt++;
 		else
 			return (NULL); // chaine invalide
 	}
 	str_arg = conversion(pt,args);
 	*next_pt = ++pt;
+	//GESTION DES ZEROS
+	if (!ft_strncmp(str_arg, "0", ft_strlen(str_arg)) && !fw && !precision && dot)
 		return ("");
-	if ((precision = precision - ft_strlen(str_arg)) < 0)
-		precision = 0;
-	if ((fw = fw - (precision + ft_strlen(str_arg))) < 0)
-		fw = 0;
-	rt = (char*)ft_calloc(fw + precision + ft_strlen(str_arg) + 1, sizeof(*rt));
-	if (negative)
-		catnegative(fw, precision, rt, str_arg);
+	else if (!ft_strncmp(str_arg, "0", ft_strlen(str_arg)) && !precision && dot)
+		return ("");
 	else
-		catpositive(fw, precision, rt, str_arg);
-	return (rt);	
+	{
+		if ((precision = precision - ft_strlen(str_arg)) < 0)
+			precision = 0;
+		if ((fw = fw - (precision + ft_strlen(str_arg))) < 0)
+			fw = 0;
+		rt = (char*)ft_calloc(fw + precision + ft_strlen(str_arg) + 1, sizeof(*rt));
+		if (negative)
+			catnegative(fw, precision, rt, str_arg);
+		else
+			catpositive(fw, precision, rt, str_arg);
+		return (rt);	
+	}
 }

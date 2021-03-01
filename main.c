@@ -5,9 +5,12 @@
 int main(void)
 {
 #ifdef TEST
-printf("%0d\n",0);
-ft_printf("%0d\n",0);
-//ft_printf("%-i\n",8);
+	printf("|%2.d|\n",0);
+	printf("|%1.0d|\n",0);
+	printf("|%0.0d|\n",0);
+	printf("|%.0d|\n",0);
+	printf("\n");
+	printf("%0d\n", 0);
 #endif
     /*
     ft_printf("Hello %%\n", "my friend!");
