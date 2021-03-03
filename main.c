@@ -5,10 +5,8 @@
 int main(void)
 {
 #ifdef TEST
-//ft_printf("%.1i\n", 0);
-//ft_printf("Simple input\n");
-//ft_printf("%-0i\n", 8);
-ft_printf("%0.i\n", 0);
+ft_printf("%1.d\n", 0);
+//ft_printf("%.1d\n", 0);
 #endif
     /*
 	printf("|%2.d|\n",0);
