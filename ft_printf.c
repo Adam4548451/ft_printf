@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 07:13:09 by amaroni           #+#    #+#             */
-/*   Updated: 2021/03/03 10:10:48 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/03/03 14:08:29 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 		}
 		else if (*pt == '*')
 		{
-			fw = ft_abs(va_arg(args, int));
+			fw = (va_arg(args, int));
 			if (*++pt == '.')
 			{
 				dot = 1;
@@ -146,6 +146,9 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 	str_arg = conversion(pt,args);
 	*next_pt = ++pt;
 	//GESTION DES ZEROS
+	if (fw < 0)
+		negative = 1;
+	fw = ft_abs(fw);
 	if (negative)
 		rt = catnegative(fw, precision, str_arg, dot);
 	else
