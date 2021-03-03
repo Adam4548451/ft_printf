@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 07:13:09 by amaroni           #+#    #+#             */
-/*   Updated: 2021/03/03 14:23:44 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/03/03 16:17:14 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,16 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 
 	while (!isConvertor(*pt))
 	{
+		if (*pt == '0' && *(pt + 1) == '*' && isConvertor(*(pt + 2)))
+		{
+			if ((precision = va_arg(args, int)) < 0)
+			{
+				fw = ft_abs(precision);
+				negative = 1;
+				precision = 0;
+			}
+			pt+=2;
+		}
 		if (ft_isdigit(*pt))
 			fw = ft_abs(atoi_next_pt(pt, &pt));
 		if(isConvertor(*pt))
