@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 09:58:00 by amaroni           #+#    #+#             */
-/*   Updated: 2021/02/17 09:58:14 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/03/03 09:46:10 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int handle_ex2cases(char *pt);
 int is_digit_or_wildcard(char *pt);
 int is_diuxX(char ch);
 char    *strchr_whitespace(char *pt);
-void catpositive(int nb_space, int nb_zero, char *dst, char *src);
-void catnegative(int nb_space, int nb_zero, char *dst, char *src);
+char	*catpositive(int nb_space, int nb_zero, char *src, int dot);
+char *catnegative(int fw, int precision, char *src, int dot);
 int atoi_next_pt(char *string, char **next_pt);
 unsigned int ft_abs(int i);
 char *handle(char *pt, int negative, va_list args, char **next_pt);

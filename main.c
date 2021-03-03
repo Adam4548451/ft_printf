@@ -5,14 +5,18 @@
 int main(void)
 {
 #ifdef TEST
+//ft_printf("%.1i\n", 0);
+//ft_printf("Simple input\n");
+//ft_printf("%-0i\n", 8);
+ft_printf("%0.i\n", 0);
+#endif
+    /*
 	printf("|%2.d|\n",0);
 	printf("|%1.0d|\n",0);
 	printf("|%0.0d|\n",0);
 	printf("|%.0d|\n",0);
 	printf("\n");
 	printf("%0d\n", 0);
-#endif
-    /*
     ft_printf("Hello %%\n", "my friend!");
     ft_printf("Hello %d %d %d\n", 15 ,16,17);
     printf("Hello %d %d %d\n", 15 ,16,17);

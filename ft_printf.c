@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 07:13:09 by amaroni           #+#    #+#             */
-/*   Updated: 2021/03/01 09:31:39 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/03/03 10:10:48 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 
 int ft_printf(const char *string, ...)
 {
-    char *pt;
-    char *output;
-    char *tmp;
+	char *pt;
+	char *output;
+	char *tmp;
 	int len;
-    int negative;
-    va_list args;
-    va_start(args, string);
+	int negative;
+	va_list args;
+	va_start(args, string);
 	char *next_pt;
 
-    negative = 0;
-    pt = (char *)string;
+	negative = 0;
+	pt = (char *)string;
 	next_pt = NULL;
 	output = NULL;
+	tmp = NULL;
     while (ft_strchr(pt, (int)'%'))
     {
         output = dupCatResize(output, pt, ft_strchr(pt, (int)'%'));
@@ -35,20 +36,22 @@ int ft_printf(const char *string, ...)
         {
             if (*pt == '-')
             {
-                negative = 1;
-                pt++;
-            }
-			tmp = handle(pt, negative, args, &next_pt);
-            output = dupCatResize(output, tmp, NULL);
+		    negative = 1;
+		    pt++;
+	    }
+	    tmp = handle(pt, negative, args, &next_pt);
+	    output = dupCatResize(output, tmp, NULL);
         }
-		pt = next_pt;
+	free(tmp);
+	pt = next_pt;
     }
-	if (pt)
-        output = dupCatResize(output, pt, NULL);
-	len = ft_strlen(output);
-	ft_putstr(output);
-	free(output);
-	return (len);
+    if (pt)
+	    output = dupCatResize(output, pt, NULL);
+    len = ft_strlen(output);
+    ft_putstr(output);
+    if(output)
+	    free(output);
+    return (len);
 }
 
 
@@ -57,19 +60,19 @@ int ft_printf(const char *string, ...)
 
 int atoi_next_pt(char *string, char **next_pt)
 {
-    char *tmp;
-    int rt;
+	char *tmp;
+	int rt;
 
-    rt = 0;
-    tmp = string;
-    while (ft_isdigit(*tmp))
-        tmp++;
-    if (tmp != string)
-    {
-        rt = ft_atoi(string);
-        *next_pt = tmp;
-    }
-    return (rt);
+	rt = 0;
+	tmp = string;
+	while (ft_isdigit(*tmp))
+		tmp++;
+	if (tmp != string)
+	{
+		rt = ft_atoi(string);
+		*next_pt = tmp;
+	}
+	return (rt);
 }
 
 unsigned int ft_abs(int i)
@@ -89,7 +92,7 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 	fw = 0;
 	precision = 0;
 	dot = 0;
-	
+
 
 	while (!isConvertor(*pt))
 	{
@@ -143,21 +146,10 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 	str_arg = conversion(pt,args);
 	*next_pt = ++pt;
 	//GESTION DES ZEROS
-	if (!ft_strncmp(str_arg, "0", ft_strlen(str_arg)) && !fw && !precision && dot)
-		return ("");
-	else if (!ft_strncmp(str_arg, "0", ft_strlen(str_arg)) && !precision && dot)
-		return ("");
+	if (negative)
+		rt = catnegative(fw, precision, str_arg, dot);
 	else
-	{
-		if ((precision = precision - ft_strlen(str_arg)) < 0)
-			precision = 0;
-		if ((fw = fw - (precision + ft_strlen(str_arg))) < 0)
-			fw = 0;
-		rt = (char*)ft_calloc(fw + precision + ft_strlen(str_arg) + 1, sizeof(*rt));
-		if (negative)
-			catnegative(fw, precision, rt, str_arg);
-		else
-			catpositive(fw, precision, rt, str_arg);
-		return (rt);	
-	}
+		rt = catpositive(fw, precision, str_arg, dot);
+	free(str_arg);
+	return (rt);	
 }
