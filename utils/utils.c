@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 15:20:25 by amaroni           #+#    #+#             */
-/*   Updated: 2021/03/04 09:12:32 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/03/04 10:24:50 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ char  *catpositive(int fw, int precision, char *src, int dot)
 	{
 		if ((len = ft_strlen(src)) && src[0] == '-')
 			len--;
-		if ((precision = precision - len) < 0)
+		if ((precision = precision - ft_strlen(src)) < 0) 
 			precision = 0;
 		if ((fw = fw - (precision + ft_strlen(src))) < 0)
 			fw = 0;
