@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 15:20:25 by amaroni           #+#    #+#             */
-/*   Updated: 2021/03/03 11:03:09 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/03/04 09:12:32 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ char    *strchr_whitespace(char *pt)
 char  *catpositive(int fw, int precision, char *src, int dot)
 {
 	char *dst;
-
+	int len;
+	
 	if (!ft_strncmp(src, "0", ft_strlen(src)) && dot)
 	{
 		dst = (char*)ft_calloc(fw + precision + ft_strlen(src) + 1, sizeof(*dst));
@@ -110,16 +111,29 @@ char  *catpositive(int fw, int precision, char *src, int dot)
 	}
 	else 
 	{
-		if ((precision = precision - ft_strlen(src)) < 0)
+		if ((len = ft_strlen(src)) && src[0] == '-')
+			len--;
+		if ((precision = precision - len) < 0)
 			precision = 0;
 		if ((fw = fw - (precision + ft_strlen(src))) < 0)
 			fw = 0;
 		dst = (char*)ft_calloc(fw + precision + ft_strlen(src) + 1, sizeof(*dst));
 		while (fw-- > 0)
 			ft_strlcat(dst, " ", ft_strlen(dst) + 2);
-		while (precision-- > 0)
-			ft_strlcat(dst, "0", ft_strlen(dst) + 2);
-		ft_strlcat(dst, src, ft_strlen(src) + ft_strlen(dst) + 1);
+		if (src[0] != '-')
+		{
+			while (precision-- > 0)
+				ft_strlcat(dst, "0", ft_strlen(dst) + 2);
+			ft_strlcat(dst, src, len + ft_strlen(dst) + 1);
+		}
+		else
+		{
+			ft_strlcat(dst, "-", ft_strlen(dst)+2);
+			while (precision-- > 0)
+				ft_strlcat(dst, "0", ft_strlen(dst) + 2);
+			ft_strlcat(dst, src + 1, len + ft_strlen(dst) + 1);
+		}
+			
 	}
 	return dst;
 }
