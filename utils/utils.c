@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 15:20:25 by amaroni           #+#    #+#             */
-/*   Updated: 2021/03/04 10:24:50 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/03/04 11:15:58 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,11 @@ char  *catpositive(int fw, int precision, char *src, int dot)
 		else
 		{
 			ft_strlcat(dst, "-", ft_strlen(dst)+2);
+			if (dot)
+				precision++;
 			while (precision-- > 0)
 				ft_strlcat(dst, "0", ft_strlen(dst) + 2);
-			ft_strlcat(dst, src + 1, len + ft_strlen(dst) + 1);
+			ft_strlcat(dst, src + 1, ft_strlen(src) - 1 + ft_strlen(dst) + 1);
 		}
 			
 	}
