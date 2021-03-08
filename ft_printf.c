@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 07:13:09 by amaroni           #+#    #+#             */
-/*   Updated: 2021/03/08 17:17:55 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/03/08 18:58:07 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 {
 	int fw;
 	int precision;
-	char *rt;
-	char *str_arg;
 	int dot;
 	int zero;
 	fw = 0;
@@ -103,7 +101,7 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 			fw = va_arg(args, int);
 			*next_pt = pt + 3;
 			//conversion %0*[X]
-			return (conversion_zero_flag(fw, precision, args, pt + 2));
+			return (conversion_zero_flag(fw, args, pt + 2));
 		}
 		else if (*pt == '*')
 		{
@@ -133,7 +131,7 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 				{
 					//conversion %*.[X]
 					*next_pt = pt + 1;
-					return	conversion_wildcard_dot(fw, precision, args, pt, negative);
+					return	conversion_wildcard_dot(fw, args, pt, negative);
 				}
 				else 
 					return (NULL);
@@ -142,7 +140,7 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 			{
 				//conversion %*[X]
 				*next_pt = pt + 1;
-				return conversion_wildcard(fw, precision, args, pt, negative);
+				return conversion_wildcard(fw, args, pt, negative);
 			}
 			else
 				return (NULL);

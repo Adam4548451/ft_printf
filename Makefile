@@ -20,7 +20,7 @@ clean_libft:
 #UTILS
 #........................................................................................................................................................................................................
 SRC_UTILS = ./utils/conversion.c ./utils/exigences.c ./utils/utils.c 
-OBJ_UTILS = ./utils/conversion.o ./utils/ex2cases.o ./utils/exigences.o ./utils/utils.o 
+OBJ_UTILS = ./utils/conversion.o ./utils/exigences.o ./utils/utils.o 
 utils: $(OBJ_UTILS)
 clean_utils:
 	rm -rf ./utils/*.o

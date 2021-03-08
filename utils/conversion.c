@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 10:21:59 by amaroni           #+#    #+#             */
-/*   Updated: 2021/03/08 17:18:14 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/03/08 18:55:32 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char *conversion(char *pt, va_list args)
     return (str_arg);
 }
 
-char *conversion_zero_flag(int fw, int precision, va_list args, char *pt)
+char *conversion_zero_flag(int fw, va_list args, char *pt)
 {
 	char *src;
 	char *dst;
@@ -120,7 +120,7 @@ char *conversion_zero_flag(int fw, int precision, va_list args, char *pt)
 	return (dst);	
 }
 
-char *conversion_wildcard(int fw, int precision, va_list args, char *pt, int negative)
+char *conversion_wildcard(int fw, va_list args, char *pt, int negative)
 {
 	char *src;
 	char *dst;
@@ -147,7 +147,7 @@ char *conversion_wildcard(int fw, int precision, va_list args, char *pt, int neg
 	return (dst);	
 }
 
-char *conversion_wildcard_dot(int fw, int precision, va_list args, char *pt, int negative)
+char *conversion_wildcard_dot(int fw, va_list args, char *pt, int negative)
 {
 	char *src;
 	char *dst;
@@ -179,24 +179,48 @@ char *conversion_wildcard_dot_digit(int fw, int precision, va_list args, char *p
 	char *src;
 	char *dst;
 	
-	if (fw < 0)
+	if (fw < 0 && (fw = ft_abs(fw)))
 		negative = 1;
 	src = conversion(pt, args);
-	if ((fw = ft_abs(fw) - ft_strlen(src)) < 0)
-		fw = 0;
-	dst = (char*)ft_calloc(ft_strlen(src) + fw + 1, sizeof(char*));
-	if (negative)			
+	if (precision > fw)
 	{
-		ft_strlcat(dst, src, ft_strlen(dst) + ft_strlen(src) + 2);
-		while (fw--)
-			ft_strlcat(dst, " ", ft_strlen(dst) + 2);
+		if ((precision = precision - ft_strlen(src)) < 0)
+			precision = 0;
+		dst = (char*)ft_calloc(ft_strlen(src) + precision + 1, sizeof(char*));
+		if (src[0] == '-' && src++)
+			ft_strlcat(dst, "-", ft_strlen(dst) + 2);
+		while (precision--)
+			ft_strlcat(dst, "0", ft_strlen(dst) + 2);
+		ft_strlcat(dst,src, ft_strlen(dst) + ft_strlen(src) + 1);
 	}
 	else
 	{
-		while (fw--)
-			ft_strlcat(dst, " ", ft_strlen(dst) + 2);
-		ft_strlcat(dst, src, ft_strlen(dst) + ft_strlen(src) + 2);
-	}	
+		if ((precision = precision - ft_strlen(src)) < 0)
+			precision = 0;
+		if ((fw	= fw - (precision + ft_strlen(src))) < 0)
+			fw = 0;
+		dst = (char*)ft_calloc(ft_strlen(src) + fw + precision + 1, sizeof(char*));
+		if (negative)
+		{
+			if (src[0] == '-' && src++)
+				ft_strlcat(dst, "-", ft_strlen(dst) + 2);
+			while (precision--)
+				ft_strlcat(dst, "0", ft_strlen(dst) + 2);
+			ft_strlcat(dst,src, ft_strlen(dst) + ft_strlen(src) + 1);
+			while (fw--)
+				ft_strlcat(dst, " ", ft_strlen(dst) + 2);
+		}
+		else
+		{
+			while (fw--)
+				ft_strlcat(dst, " ", ft_strlen(dst) + 2);
+			if (src[0] == '-' && src++)
+				ft_strlcat(dst, "-", ft_strlen(dst) + 2);
+			while (precision--)
+				ft_strlcat(dst, "0", ft_strlen(dst) + 2);
+			ft_strlcat(dst,src, ft_strlen(dst) + ft_strlen(src) + 1);
+		}
+	}
 	free(src);
 	return (dst);	
 }
