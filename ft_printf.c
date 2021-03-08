@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 07:13:09 by amaroni           #+#    #+#             */
-/*   Updated: 2021/03/08 21:36:51 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/03/09 00:22:54 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,14 +108,13 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 			fw = (va_arg(args, int));
 			if (*++pt == '.')
 			{
-				dot = 1;
 				if (is_digit_or_wildcard(++pt))
 				{	
 					if (ft_isdigit(*pt))
 						precision = ft_abs(atoi_next_pt(pt, &pt));
 					else if (*pt == '*')
 					{
-						precision = ft_abs(va_arg(args, int));
+						precision = (va_arg(args, int));
 						pt++;
 					}
 					else
@@ -185,6 +184,28 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 			}
 			else
 				return (NULL);
+		}
+		else if (*pt == '.')
+		{
+			if(is_digit_or_wildcard(++pt))
+			{
+				if (ft_isdigit(*pt))
+					precision = atoi_next_pt(pt, &pt);
+				else
+				{
+					precision = va_arg(args, int);
+					pt++;
+				}
+			}
+			if (isConvertor(*pt))
+			{
+				*next_pt = pt + 1;
+				if (*(pt - 1) == '.')
+					return conversion_wildcard_dot(fw, args, pt, negative);
+				return conversion_wildcard_dot_digit(fw, precision, args, pt, negative);
+			}
+			return (NULL);
+			
 		}
 		else
 			return (NULL);
