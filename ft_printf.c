@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 07:13:09 by amaroni           #+#    #+#             */
-/*   Updated: 2021/03/08 11:50:45 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/03/08 17:17:55 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,10 +123,18 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 					else
 						return (NULL);
 					if (isConvertor(*pt))
-						return NULL;//conversion %*.#[X]
+					{
+						//conversion %*.#[X]
+						*next_pt = pt + 1;
+						return conversion_wildcard_dot_digit(fw, precision, args, pt, negative);
+					}
 				}
 				else if (isConvertor(*pt))
-					return	NULL;//conversion %*.[X]
+				{
+					//conversion %*.[X]
+					*next_pt = pt + 1;
+					return	conversion_wildcard_dot(fw, precision, args, pt, negative);
+				}
 				else 
 					return (NULL);
 			}
