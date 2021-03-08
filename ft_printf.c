@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 07:13:09 by amaroni           #+#    #+#             */
-/*   Updated: 2021/03/08 11:02:15 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/03/08 11:50:45 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 		{
 			fw = va_arg(args, int);
 			*next_pt = pt + 3;
-			return (conversion_zero_flag(fw, precision, args, pt + 2));//conversion %0*[X]
+			//conversion %0*[X]
+			return (conversion_zero_flag(fw, precision, args, pt + 2));
 		}
 		else if (*pt == '*')
 		{
@@ -130,7 +131,11 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 					return (NULL);
 			}
 			else if (isConvertor(*pt))
-				return NULL;//conversion %*[X]
+			{
+				//conversion %*[X]
+				*next_pt = pt + 1;
+				return conversion_wildcard(fw, precision, args, pt, negative);
+			}
 			else
 				return (NULL);
 		}
@@ -169,4 +174,5 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 		else
 			return (NULL);
 	}
+	return (NULL);
 }

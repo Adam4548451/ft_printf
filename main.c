@@ -5,12 +5,21 @@
 int main(void)
 {
 #ifdef TEST
-ft_printf("%0*d\n", 5, -12);
-ft_printf("%0*d\n", -5, -12);
-ft_printf("%0*d\n", 0, -12);
-printf("%0*d\n", 5, -12);
-printf("%0*d\n", -5, -12);
-printf("%0*d\n", 0, -12);
+//ft_printf("%*d\n", 6, 9);
+//ft_printf("%*d\n", 6, -9);
+ft_printf("%-*d\n", 6, 9);
+//ft_printf("%*d\n", -6, 9);
+//ft_printf("%-*d\n", -6, 9);
+//ft_printf("%*d\n", -6, -9);
+//ft_printf("%-*d\n", -6, -9);
+//
+//printf("%*d\n", 6, 9);
+//printf("%*d\n", 6, -9);
+printf("%-*d\n", 6, 9);
+//printf("%*d\n", -6, 9);
+//printf("%-*d\n", -6, 9);
+//printf("%*d\n", -6, -9);
+//printf("%-*d\n", -6, -9);
 #endif
     /*
 	printf("|%2.d|\n",0);

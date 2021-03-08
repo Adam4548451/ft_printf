@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 09:58:00 by amaroni           #+#    #+#             */
-/*   Updated: 2021/03/08 10:49:56 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/03/08 11:51:51 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ int atoi_next_pt(char *string, char **next_pt);
 unsigned int ft_abs(int i);
 char *handle(char *pt, int negative, va_list args, char **next_pt);
 char *conversion_zero_flag(int fw, int precision, va_list args, char *pt);
+char *conversion_wildcard(int fw, int precision, va_list args, char *pt, int negative);
 #endif
