@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 07:13:09 by amaroni           #+#    #+#             */
-/*   Updated: 2021/03/05 19:46:50 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/03/08 11:02:15 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,30 @@ int ft_printf(const char *string, ...)
 	next_pt = NULL;
 	output = NULL;
 	tmp = NULL;
-    while (ft_strchr(pt, (int)'%'))
-    {
-        output = dupCatResize(output, pt, ft_strchr(pt, (int)'%'));
-        pt = ft_strchr(pt, (int)'%');
-        if (*(++pt) != '%')
-        {
-            if (*pt == '-')
-            {
-		    negative = 1;
-		    pt++;
-	    }
-	    tmp = handle(pt, negative, args, &next_pt);
-	    output = dupCatResize(output, tmp, NULL);
-        }
-	free(tmp);
-	pt = next_pt;
-    }
-    if (pt)
-	    output = dupCatResize(output, pt, NULL);
-    len = ft_strlen(output);
-    ft_putstr(output);
-    if(output)
-	    free(output);
-    return (len);
+	while (ft_strchr(pt, (int)'%'))
+	{
+		output = dupCatResize(output, pt, ft_strchr(pt, (int)'%'));
+		pt = ft_strchr(pt, (int)'%');
+		if (*(++pt) != '%')
+		{
+			if (*pt == '-')
+			{
+				negative = 1;
+				pt++;
+			}
+			tmp = handle(pt, negative, args, &next_pt);
+			output = dupCatResize(output, tmp, NULL);
+		}
+		free(tmp);
+		pt = next_pt;
+	}
+	if (pt)
+		output = dupCatResize(output, pt, NULL);
+	len = ft_strlen(output);
+	ft_putstr(output);
+	if(output)
+		free(output);
+	return (len);
 }
 
 
@@ -100,38 +100,9 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 	{
 		if (*pt == '0' && *(pt + 1) == '*' && isConvertor(*(pt + 2)))
 		{
-			if ((fw = va_arg(args, int)) < 0)
-			{
-				negative = 1;
-				fw = ft_abs(fw);
-			}
-			else
-			{
-				precision = fw;
-				fw = 0;
-			}
-			pt+=2;
-			zero = 1;
-		}
-		if (ft_isdigit(*pt))
-			fw = ft_abs(atoi_next_pt(pt, &pt));
-		if(isConvertor(*pt))
-			break;
-		if (*pt == '.')
-		{
-			dot = 1;
-			if (ft_isdigit(*++pt))
-				precision = ft_abs(atoi_next_pt(pt, &pt));
-			else if(*pt == '*')
-			{
-				if (((precision = va_arg(args, int)) < 0))
-					precision = 1;
-				pt++;
-			}
-			else if (isConvertor(*pt))
-				break ;
-			else
-				return (NULL); // Chaine invalide
+			fw = va_arg(args, int);
+			*next_pt = pt + 3;
+			return (conversion_zero_flag(fw, precision, args, pt + 2));//conversion %0*[X]
 		}
 		else if (*pt == '*')
 		{
@@ -139,38 +110,63 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 			if (*++pt == '.')
 			{
 				dot = 1;
-				if (ft_isdigit(*++pt))
-					precision = ft_abs(atoi_next_pt(pt, &pt));
-				else if (*pt == '*')
-				{
-					precision = ft_abs(va_arg(args, int));
-					pt++;
+				if (is_digit_or_wildcard(++pt))
+				{	
+					if (ft_isdigit(*pt))
+						precision = ft_abs(atoi_next_pt(pt, &pt));
+					else if (*pt == '*')
+					{
+						precision = ft_abs(va_arg(args, int));
+						pt++;
+					}
+					else
+						return (NULL);
+					if (isConvertor(*pt))
+						return NULL;//conversion %*.#[X]
 				}
 				else if (isConvertor(*pt))
-					break ;
+					return	NULL;//conversion %*.[X]
 				else 
 					return (NULL);
 			}
 			else if (isConvertor(*pt))
-				break;
+				return NULL;//conversion %*[X]
 			else
 				return (NULL);
 		}
-		else if(*pt == '-')
-			pt++;
+		else if (is_digit_or_wildcard(pt))
+		{
+			if (ft_isdigit(*pt))
+				fw = ft_abs(atoi_next_pt(pt, &pt));
+			else
+			{
+				fw = va_arg(args, int);
+				pt++;
+			}
+			if (isConvertor(*pt))
+				return NULL;//conversion %#[X]
+			else if (*pt == '.')
+			{
+				if (is_digit_or_wildcard(++pt))
+				{
+					if (ft_isdigit(*pt))
+						precision = ft_abs(atoi_next_pt(pt, &pt));
+					else
+					{
+						if (((precision = va_arg(args, int)) < 0))
+							precision = 1;
+						pt++;
+					}
+				}
+				if (isConvertor(*pt))
+					return NULL;//conversion %#.#[X]
+				else
+					return NULL;
+			}
+			else
+				return (NULL);
+		}
 		else
-			return (NULL); // chaine invalide
+			return (NULL);
 	}
-	str_arg = conversion(pt,args);
-	*next_pt = ++pt;
-	//GESTION DES ZEROS
-	if (fw < 0)
-		negative = 1;
-	fw = ft_abs(fw);
-	if (negative)
-		rt = catnegative(fw, precision, str_arg, dot);
-	else
-		rt = catpositive(fw, precision, str_arg, dot, zero);
-	free(str_arg);
-	return (rt);	
 }

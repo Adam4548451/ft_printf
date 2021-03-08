@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conversion.c                                          :+:      :+:    :+:   */
+/*   conversion.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 10:21:59 by amaroni           #+#    #+#             */
-/*   Updated: 2021/02/13 10:22:01 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/03/08 11:07:01 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,3 +88,34 @@ char *conversion(char *pt, va_list args)
     return (str_arg);
 }
 
+char *conversion_zero_flag(int fw, int precision, va_list args, char *pt)
+{
+	char *src;
+	char *dst;
+	int negative;
+
+	negative = 0;
+	if (fw < 0)
+		negative = 1;
+	src = conversion(pt, args);
+	if ((fw = ft_abs(fw) - ft_strlen(src)) < 0)
+		fw = 0;
+	dst = (char*)ft_calloc(ft_strlen(src) + fw + 1, sizeof(char*));
+	if (negative)
+	{
+		if (src[0] == '-')
+			ft_strlcat(dst, src, ft_strlen(dst) + ft_strlen(src) + 2);
+		while (fw--)
+			ft_strlcat(dst, " ", ft_strlen(dst) + 2);
+	}	
+	else
+	{
+		if (src[0] == '-')
+			ft_strlcat(dst, "-", ft_strlen(dst) + 2);
+		while (fw--)
+			ft_strlcat(dst, "0", ft_strlen(dst) + 2);
+		ft_strlcat(dst, src + 1, ft_strlen(dst) + ft_strlen(src) + 2);
+	}
+	free(src);
+	return (dst);	
+}
