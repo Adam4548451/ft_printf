@@ -5,18 +5,9 @@
 int main(void)
 {
 #ifdef TEST
-printf("%*.*d\n", 3,6,9);
-printf("%*.*d\n", 6,3,9);
-printf("%*.*d\n", 6,3,-9);
-printf("%*.*d\n", -6,3,-9);
-printf("%*.*d\n", -3,6,9);
-printf("%*.*d\n", 3,-6,9);
-printf("%*.*d\n", -3,-6,9);
-printf("%*.*d\n", 3,6,-9);
-printf("%*.*d\n", -3,6,-9);
-printf("%*.*d\n", -3,3,1825);
-printf("%*.*d\n", -3,0,9);
-printf("%*.*d\n", -3,0,-9);
+//printf("|%0.d|\n", 0);
+ ft_printf("00486 attendu: %1.5d\n",486);
+
 #endif
     /*
 	printf("|%2.d|\n",0);
