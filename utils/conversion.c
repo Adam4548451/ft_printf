@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 10:21:59 by amaroni           #+#    #+#             */
-/*   Updated: 2021/03/09 09:14:58 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/03/09 09:28:14 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,9 @@ char *conversion_zero_flag(int fw, va_list args, char *pt)
 	dst = (char*)ft_calloc(ft_strlen(src) + fw + 1, sizeof(char*));
 	if (negative)
 	{
-		if (src[0] == '-')
-			ft_strlcat(dst, src, ft_strlen(dst) + ft_strlen(src) + 2);
+		if (src[0] == '-' && src++)
+			ft_strlcat(dst, "-", ft_strlen(dst) + 2);
+		ft_strlcat(dst, src, ft_strlen(dst) + ft_strlen(src) + 1);
 		while (fw--)
 			ft_strlcat(dst, " ", ft_strlen(dst) + 2);
 	}	
