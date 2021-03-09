@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 07:13:09 by amaroni           #+#    #+#             */
-/*   Updated: 2021/03/09 00:22:54 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/03/09 08:56:11 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,6 @@ int ft_printf(const char *string, ...)
 		pt = ft_strchr(pt, (int)'%');
 		if (*(++pt) != '%')
 		{
-			if (*pt == '-')
-			{
-				negative = 1;
-				pt++;
-			}
 			tmp = handle(pt, negative, args, &next_pt);
 			output = dupCatResize(output, tmp, NULL);
 		}
@@ -96,12 +91,22 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 
 	while (!isConvertor(*pt))
 	{
-		if (*pt == '0' && *(pt + 1) == '*' && isConvertor(*(pt + 2)))
+		if (*pt == '-')
 		{
-			fw = va_arg(args, int);
-			*next_pt = pt + 3;
-			//conversion %0*[X]
-			return (conversion_zero_flag(fw, args, pt + 2));
+			negative = 1;
+			pt++;
+		}
+		if (*pt == '0')
+		{
+			if (*++pt == '-')
+				pt++;
+			if (*pt == '*' && isConvertor(*(pt + 1)))
+			{
+				fw = va_arg(args, int);
+				*next_pt = pt + 2;
+				//conversion %0*[X]
+				return (conversion_zero_flag(fw, args, pt + 1));
+			}
 		}
 		else if (*pt == '*')
 		{
@@ -207,8 +212,6 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 			return (NULL);
 			
 		}
-		else
-			return (NULL);
 	}
 	*next_pt = pt + 1;
 	return (conversion(pt, args));

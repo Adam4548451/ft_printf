@@ -5,8 +5,8 @@
 int main(void)
 {
 #ifdef TEST
-//printf("|%0.d|\n", 0);
- ft_printf("|%*.*i|\n", -2, -2, 8);
+ ft_printf("|%0*d|\n", 3, -12);
+
 
 
 
