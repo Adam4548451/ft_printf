@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 10:21:59 by amaroni           #+#    #+#             */
-/*   Updated: 2021/03/09 00:16:24 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/03/09 09:14:58 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,12 @@ char *conversion_wildcard_dot_digit(int fw, int precision, va_list args, char *p
 	tmp = src;
 	if (!ft_strncmp(src, "0",ft_strlen(src)) && !fw && !precision)
 		dst = ft_strdup("");
+	if (!ft_strncmp(src, "0",ft_strlen(src)) && !precision)
+	{
+		dst = (char*)ft_calloc(fw + 1, sizeof(char*));
+		while (fw--)
+			ft_strlcat(dst, " ", ft_strlen(dst) + 2);
+	}
 	else if (precision > fw)
 	{
 		if (src[0] == '-')

@@ -5,7 +5,9 @@
 int main(void)
 {
 #ifdef TEST
- ft_printf("|%0*d|\n", 3, -12);
+ ft_printf("|%-1.0d|\n", 0);
+ ft_printf("|%-1.0d|\n", 8);
+ ft_printf("|%-1.0d|\n", -12);
 
 
 

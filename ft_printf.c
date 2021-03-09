@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 07:13:09 by amaroni           #+#    #+#             */
-/*   Updated: 2021/03/09 08:56:11 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/03/09 09:07:46 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ char *handle(char *pt, int negative, va_list args, char **next_pt)
 		else if (is_digit_or_wildcard(pt))
 		{
 			if (ft_isdigit(*pt))
-				fw = ft_abs(atoi_next_pt(pt, &pt));
+				fw = (atoi_next_pt(pt, &pt));
 			else
 			{
 				fw = va_arg(args, int);

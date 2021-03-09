@@ -6,7 +6,7 @@
 /*   By: amaroni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 15:20:25 by amaroni           #+#    #+#             */
-/*   Updated: 2021/03/05 19:46:35 by amaroni          ###   ########.fr       */
+/*   Updated: 2021/03/09 09:00:34 by amaroni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,94 +92,6 @@ char    *strchr_whitespace(char *pt)
 		return (NULL);
 }
 
-char  *catpositive(int fw, int precision, char *src, int dot, int zero)
-{
-	char *dst;
-	int len;
-	
-	if (!ft_strncmp(src, "0", ft_strlen(src)) && dot)
-	{
-		dst = (char*)ft_calloc(fw + precision + ft_strlen(src) + 1, sizeof(*dst));
-		if (!fw && !precision)
-			dst[0] = '\0';
-		else if (!precision)
-			while (fw-- > 0)
-				ft_strlcat(dst, " ", ft_strlen(dst) + 2);
-		else if (fw <= precision)
-			while (precision-- > 0)
-				ft_strlcat(dst, "0", ft_strlen(dst) + 2);
-	}
-	else 
-	{
-
-		if (src[0] == '-')
-		{
-			len =	ft_strlen(src) - 1; 
-			if ((precision = precision - len) < 0) 
-				precision = 0;
-			if (zero && precision)
-				precision--;
-		}
-		else
-		{
-			len = ft_strlen(src);
-			if ((precision = precision - ft_strlen(src)) < 0) 
-				precision = 0;
-		}
-		if ((fw = fw - (precision + ft_strlen(src))) < 0)
-			fw = 0;
-		dst = (char*)ft_calloc(fw + precision + ft_strlen(src) + 1, sizeof(*dst));
-		while (fw-- > 0)
-			ft_strlcat(dst, " ", ft_strlen(dst) + 2);
-		if (src[0] != '-')
-		{
-			while (precision-- > 0)
-				ft_strlcat(dst, "0", ft_strlen(dst) + 2);
-			ft_strlcat(dst, src, len + ft_strlen(dst) + 1);
-		}
-		else
-		{
-			ft_strlcat(dst, "-", ft_strlen(dst)+2);
-			while (precision-- > 0)
-				ft_strlcat(dst, "0", ft_strlen(dst) + 2);
-			ft_strlcat(dst, src + 1, len + ft_strlen(dst) + 1);
-		}
-			
-	}
-	return dst;
-}
-
-char *catnegative(int fw, int precision, char *src, int dot)
-{
-	char *dst;
-
-	if (!ft_strncmp(src, "0", ft_strlen(src)) && dot)
-	{
-		dst = (char*)ft_calloc(fw + precision + ft_strlen(src) + 1, sizeof(*dst));
-		if (!fw && !precision)
-			dst[0] = '\0';
-		else if (!precision)
-			while (fw-- > 0)
-				ft_strlcat(dst, " ", ft_strlen(dst) + 2);
-		else if (fw <= precision)
-			while (precision-- > 0)
-				ft_strlcat(dst, "0", ft_strlen(dst) + 2);
-	}
-	else
-	{
-		if ((precision = precision - ft_strlen(src)) < 0)
-			precision = 0;
-		if ((fw = fw - (precision + ft_strlen(src))) < 0)
-			fw = 0;
-		dst = (char*)ft_calloc(fw + precision + ft_strlen(src) + 1, sizeof(*dst));
-		while (precision-- > 0)
-			ft_strlcat(dst, "0", ft_strlen(dst) + 2);
-		ft_strlcat(dst, src, ft_strlen(src) + ft_strlen(dst) + 2);
-		while (fw-- > 0)
-			ft_strlcat(dst, " ", ft_strlen(dst) + 2);
-	}
-		return (dst);
-}
 
 
 
